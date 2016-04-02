@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using TiledSharp;
+using Tiled;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 public class TiledMapConverter : EditorWindow
 {
@@ -56,12 +57,12 @@ public class TiledMapConverter : EditorWindow
                 DestroyImmediate(_targetObject.transform.GetChild(i).gameObject);
             }
 
-            var map = new TmxMap(_tmxFile);
+            var map = Map.FromFile(_tmxFile);
 
-            var tilesetSprites = new Dictionary<int, Sprite>();
-            foreach (var tileset in map.Tilesets)
+            var tilesetSprites = new Dictionary<long, Sprite>();
+            foreach (var tileset in map.TileSets)
             {
-                var sprites = AssetDatabase.LoadAllAssetsAtPath(tileset.Image.Source)
+                var sprites = AssetDatabase.LoadAllAssetsAtPath(tileset.Source)
                                            .OfType<Sprite>()
                                            .ToArray();
 
@@ -74,40 +75,44 @@ public class TiledMapConverter : EditorWindow
             }
 
             var layerZ = 0;
-            foreach (var layer in map.AllLayers)
+            foreach (var layer in map.Layers)
             {
                 var layerObject = new GameObject(layer.Name);
                 layerObject.transform.SetParent(_targetObject.transform);
                 layerObject.transform.SetAsFirstSibling();
                 layerObject.transform.localPosition = new Vector3(0, 0, layerZ--);
 
-                var tileLayer = layer as TmxLayer;
+                var tileLayer = layer as TileLayer;
                 if (tileLayer != null)
                 {
-                    foreach (var tile in tileLayer.Tiles)
+                    for (int y = 0; y < tileLayer.Height; y++)
                     {
-                        if (tile.Gid <= 0)
+                        for (int x = 0; x < tileLayer.Width; x++)
                         {
-                            continue;
+                            var tile = tileLayer[x, y];
+                            if (tile.Gid <= 0)
+                            {
+                                continue;
+                            }
+
+                            var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.Gid));
+                            tileObject.transform.SetParent(layerObject.transform);
+                            tileObject.transform.localPosition = new Vector3(x, -y, 0);
+
+                            var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
+                            tileRenderer.sprite = tilesetSprites[tile.Gid];
                         }
-
-                        var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", tile.X, tile.Y, tile.Gid));
-                        tileObject.transform.SetParent(layerObject.transform);
-                        tileObject.transform.localPosition = new Vector3(tile.X, -tile.Y, 0);
-
-                        var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
-                        tileRenderer.sprite = tilesetSprites[tile.Gid];
                     }
                 }
 
-                var objectGroup = layer as TmxObjectGroup;
+                var objectGroup = layer as ObjectGroup;
                 if (objectGroup != null)
                 {
                     foreach (var obj in objectGroup.Objects)
                     {
                         var objGameObject = new GameObject(obj.Name);
                         objGameObject.transform.SetParent(layerObject.transform);
-                        objGameObject.transform.localPosition = new Vector3((float)obj.X / map.TileWidth, (float)-obj.Y / map.TileHeight, 0);
+                        objGameObject.transform.localPosition = new Vector3((float)obj.Position.x / map.TileWidth, (float)-obj.Position.y / map.TileHeight, 0);
                     }
                 }
             }
