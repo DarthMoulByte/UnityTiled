@@ -5,86 +5,66 @@ using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
 
-public class TiledMapConverter : EditorWindow
+[CustomEditor(typeof(TiledMap))]
+public class TiledMapEditor : Editor
 {
-    private GameObject _targetObject;
-    private string _tmxFile;
-
-    void OnGUI()
+    public override void OnInspectorGUI()
     {
-        _targetObject = (GameObject) EditorGUILayout.ObjectField("Target Object", _targetObject, typeof(GameObject), true);
+        base.OnInspectorGUI();
 
-        using (new EditorGUILayout.HorizontalScope())
+        var map = (TiledMap)target;
+
+        if (GUILayout.Button("Locate TMX Map"))
         {
-            _tmxFile = EditorGUILayout.TextField("TMX Map", _tmxFile);
-
-            if (GUILayout.Button("..."))
-            {
-                var file = EditorUtility.OpenFilePanel("Choose TMX File", Application.dataPath, "tmx,xml");
-                if (!string.IsNullOrEmpty(file))
-                    _tmxFile = TiledHelpers.GetAssetPath(file);
-            }
+            var file = EditorUtility.OpenFilePanel("Choose TMX File", Application.dataPath, "tmx,xml");
+            if (!string.IsNullOrEmpty(file))
+                map.tmxFile = TiledHelpers.GetAssetPath(file);
         }
 
-        if (string.IsNullOrEmpty(_tmxFile) && !File.Exists(_tmxFile))
+        if (string.IsNullOrEmpty(map.tmxFile) && !File.Exists(map.tmxFile))
         {
             EditorGUILayout.HelpBox("TMX file path required.", MessageType.Error);
             GUI.enabled = false;
         }
         else
         {
-            GUI.enabled = true;
-        }
-
-        if (GUILayout.Button("Convert"))
-        {
-            PrepareMapRoot();
-
-            var map = Map.FromFile(_tmxFile);
-            var spriteCache = new SpriteCache(map);
-
-            var allCreatedObjects = new List<GameObject>();
-
-            var layerZ = 0;
-            foreach (var layer in map.layers)
+            if (GUILayout.Button("Import"))
             {
-                var layerObject = new GameObject(layer.name);
-                layerObject.isStatic = true;
-                layerObject.transform.SetParent(_targetObject.transform);
-                layerObject.transform.SetAsFirstSibling();
-                layerObject.transform.localPosition = new Vector3(0, 0, layerZ--);
-
-                var tileLayer = layer as TileLayer;
-                if (tileLayer != null)
+                for (int i = map.transform.childCount - 1; i >= 0; i--)
                 {
-                    CreateSpritesForLayer(spriteCache, layerObject, tileLayer);
+                    DestroyImmediate(map.transform.GetChild(i).gameObject);
                 }
 
-                var objectGroup = layer as ObjectGroup;
-                if (objectGroup != null)
+                var tmxMap = Map.FromFile(map.tmxFile);
+                var spriteCache = new SpriteCache(tmxMap);
+
+                var allCreatedObjects = new List<GameObject>();
+
+                var layerZ = 0;
+                foreach (var layer in tmxMap.layers)
                 {
-                    allCreatedObjects.AddRange(CreateObjects(map, layer, layerObject, objectGroup));
+                    var layerObject = new GameObject(layer.name);
+                    layerObject.isStatic = true;
+                    layerObject.transform.SetParent(map.transform);
+                    layerObject.transform.SetAsFirstSibling();
+                    layerObject.transform.localPosition = new Vector3(0, 0, layerZ--);
+
+                    var tileLayer = layer as TileLayer;
+                    if (tileLayer != null)
+                    {
+                        CreateSpritesForLayer(spriteCache, layerObject, tileLayer);
+                    }
+
+                    var objectGroup = layer as ObjectGroup;
+                    if (objectGroup != null)
+                    {
+                        allCreatedObjects.AddRange(CreateObjects(tmxMap, layer, layerObject, objectGroup));
+                    }
                 }
+
+                SendOnCreatedByTiledUtilitiesMessage(allCreatedObjects);
             }
-
-            SendOnCreatedByTiledUtilitiesMessage(allCreatedObjects);
         }
-    }
-
-    private void PrepareMapRoot()
-    {
-        if (!_targetObject)
-        {
-            var mapName = Path.GetFileNameWithoutExtension(_tmxFile);
-            _targetObject = new GameObject(mapName);
-        }
-
-        for (int i = _targetObject.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(_targetObject.transform.GetChild(i).gameObject);
-        }
-
-        _targetObject.isStatic = true;
     }
 
     private static void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer)
@@ -279,11 +259,12 @@ public class TiledMapConverter : EditorWindow
         return null;
     }
 
-    [MenuItem("Window/Tiled/Map Converter")]
-    private static void OpenWindow()
+    [MenuItem("GameObject/2D Object/Tiled Imported Map")]
+    private static void Create()
     {
-        var window = GetWindow<TiledMapConverter>();
-        window.titleContent = new GUIContent("Map Converter");
-        window.Show();
+        var go = new GameObject("Tiled Map");
+        go.isStatic = true;
+        go.AddComponent<TiledMap>();
+        Selection.activeGameObject = go;
     }
 }

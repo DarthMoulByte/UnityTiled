@@ -4,7 +4,7 @@ A set of utilities for working with [Tiled](http://mapeditor.org) maps in Unity.
 
 *Note: This is very much a WIP. Lots of things are yet to be implemented.*
 
-The goal of this is to be an editor tool (no runtime scripts) that can import a Tiled TMX map and produce a usable game scene. Hence everything is built out into standard Unity objects and the tools attempt to incorporate the best of Tiled with the best of Unity, such as leveraging Unity prefabs while allowing Tiled objects to override properties in the prefabs.
+The goal of this is to be an editor tool (no runtime logic) that can import a Tiled TMX map and produce a usable game scene. Since we don't want to ship TMX files, everything is built out into standard Unity objects and the tools attempt to incorporate the best of Tiled with the best of Unity, such as leveraging Unity prefabs while allowing Tiled objects to override properties in the prefabs.
 
 The tool converts maps from Tiled:
 
@@ -20,21 +20,23 @@ Into objects in Unity:
 
 Open with `Window->Tiled->Tileset Tool`.
 
-The purpose of this tool is to automatically set a texture to use multiple sprites and provide a faster way to cut up the texture into the necessary tiles in a way that is compatible with the map converter. Namely this tool keeps empty sprites so that the GID indexing can be done more easily. This tool is also much faster than the built in Sprite Editor for chopping up large tilesets, possibly simply because it doesn't check if the sprites are empty.
+This tool automatically sets a texture to use multiple sprites and provide a faster way to cut up the texture into the necessary tiles in a way that is compatible with the map converter, mainly by keeping empty sprites so that the GID indexing can be done more easily. This tool is also much faster than the built in Sprite Editor for chopping up large tilesets, possibly because it doesn't check if the sprites are empty.
 
-## Map Converter
+## Tiled Map
 
-![Map Converter](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_MapConverter.png)
+This is a simple script placed on an object in your scene to drive importing. The script itself just holds a string so it's not adding any Tiled logic into your runtime. You can create one easily via the menus:
 
-Open with `Window->Tiled->Map Converter`.
+![Create Tiled Map](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_CreateTiledMap.png)
 
-This is the main editor window for importing a TMX map. It's a pretty simple process:
+Once created the map component will show an error if there isn't a valid path to a TMX/XML file:
 
-1. Provide a GameObject to act as the root of the map. You can leave this blank and a new GameObject will be created in the current scene using the name of the TMX file. If a GameObject is provided, all of its children are removed to simplify the code, though eventually I'd like to try and not do this so that object references can be maintained.
-2. Provide a path to a TMX file in your Assets folder. The little `...` button will show you a file dialog to make this easier.
-3. Click `Convert` and it will build out all your game objects.
+![Inspector Error](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_TiledMapError.png)
 
-Here's how the conversion process currently works:
+You can type in a path or use the helpful locate button. Once you have it configured, a button will appear to allow importing:
+
+![Inspector Valid](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_TiledMapValid.png)
+
+Here's how the import process works:
 
 1. Iterate all layers in the map. Create a new GameObject for the layer using the Z axis to control layering. Then do type specific logic:
   - For tile layers, generate 1 sprite per tile underneath the layer objects. Blank spaces simply don't generate sprites, thus you can have a large sparse map and it doesn't create tons of unnecessary empty sprites in your scene.
