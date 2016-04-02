@@ -23,7 +23,7 @@ public class TiledMapConverter : EditorWindow
             {
                 var file = EditorUtility.OpenFilePanel("Choose TMX File", Application.dataPath, "tmx,xml");
                 if (!string.IsNullOrEmpty(file))
-                    _tmxFile = GetAssetPath(file);
+                    _tmxFile = TiledHelpers.GetAssetPath(file);
             }
         }
 
@@ -42,7 +42,7 @@ public class TiledMapConverter : EditorWindow
             PrepareMapRoot();
 
             var map = Map.FromFile(_tmxFile);
-            Dictionary<long, Sprite> tilesetSprites = LoadSprites(map);
+            var spriteCache = new SpriteCache(map);
 
             var allCreatedObjects = new List<GameObject>();
 
@@ -57,7 +57,7 @@ public class TiledMapConverter : EditorWindow
                 var tileLayer = layer as TileLayer;
                 if (tileLayer != null)
                 {
-                    CreateSpritesForLayer(tilesetSprites, layerObject, tileLayer);
+                    CreateSpritesForLayer(spriteCache, layerObject, tileLayer);
                 }
 
                 var objectGroup = layer as ObjectGroup;
@@ -69,18 +69,6 @@ public class TiledMapConverter : EditorWindow
 
             SendOnCreatedByTiledUtilitiesMessage(allCreatedObjects);
         }
-    }
-
-    private static string GetAssetPath(string file)
-    {
-        file = Path.GetFullPath(file);
-        file = file.Replace(Application.dataPath, "");
-        if (file.StartsWith("/") || file.StartsWith("\\"))
-        {
-            file = file.Substring(1);
-        }
-        file = Path.Combine("Assets", file);
-        return file;
     }
 
     private void PrepareMapRoot()
@@ -97,27 +85,7 @@ public class TiledMapConverter : EditorWindow
         }
     }
 
-    private static Dictionary<long, Sprite> LoadSprites(Map map)
-    {
-        var tilesetSprites = new Dictionary<long, Sprite>();
-        foreach (var tileset in map.tileSets)
-        {
-            var sprites = AssetDatabase.LoadAllAssetsAtPath(GetAssetPath(tileset.source))
-                                       .OfType<Sprite>()
-                                       .ToArray();
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                var sprite = sprites[i];
-                var spriteGid = int.Parse(sprite.name.Substring(sprite.name.LastIndexOf("_") + 1));
-                tilesetSprites[tileset.firstGid + spriteGid - 1] = sprite;
-            }
-        }
-
-        return tilesetSprites;
-    }
-
-    private static void CreateSpritesForLayer(Dictionary<long, Sprite> tilesetSprites, GameObject layerObject, TileLayer tileLayer)
+    private static void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer)
     {
         for (int y = 0; y < tileLayer.height; y++)
         {
@@ -134,7 +102,7 @@ public class TiledMapConverter : EditorWindow
                 tileObject.transform.localPosition = new Vector3(x, -y, 0);
 
                 var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
-                tileRenderer.sprite = tilesetSprites[tile.gid];
+                tileRenderer.sprite = spriteCache.GetSprite(tile.gid);
             }
         }
     }
