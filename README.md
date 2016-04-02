@@ -27,11 +27,3 @@ The purpose of this tool is to automatically set a texture to use multiple sprit
 Open with `Window->Tiled->Map Converter`.
 
 This is the main editor window. Provide a game object to be the root of the map or leave it blank to have one generated (note: all children are deleted!). Locate the TMX file in your asset directory and click the Convert button. All layers are represented as Z-ordered objects in the map root and each tile is added as a new Sprite.
-
-# Credits/License
-
-As with all UnityCommunity scripts, TiledUtilities code is provided under the terms of the MIT License.
-
-TiledUtilities is built on [TiledSharp](https://github.com/marshallward/TiledSharp) which is licensed under the Apache 2.0 License. TiledSharp uses [DotNetZip](https://dotnetzip.codeplex.com) which is licensed under the Ms-PL License. The exact licenses were taken from TileSharp and can be found in the `Editor/TiledSharp` directory in this repo.
-
-Example artwork created by [Kenney](http://kenney.nl).
