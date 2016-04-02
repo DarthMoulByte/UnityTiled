@@ -1,0 +1,1017 @@
+fileFormatVersion: 2
+guid: 01b99b5056e734b44adbc27eec44b9cc
+timeCreated: 1459576261
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Desert 1
+    21300002: Desert 2
+    21300004: Desert 3
+    21300006: Desert 4
+    21300008: Desert 5
+    21300010: Desert 6
+    21300012: Desert 7
+    21300014: Desert 8
+    21300016: Desert 9
+    21300018: Desert 10
+    21300020: Desert 11
+    21300022: Desert 12
+    21300024: Desert 13
+    21300026: Desert 14
+    21300028: Desert 15
+    21300030: Desert 16
+    21300032: Desert 17
+    21300034: Desert 18
+    21300036: Desert 19
+    21300038: Desert 20
+    21300040: Desert 21
+    21300042: Desert 22
+    21300044: Desert 23
+    21300046: Desert 24
+    21300048: Desert 25
+    21300050: Desert 26
+    21300052: Desert 27
+    21300054: Desert 28
+    21300056: Desert 29
+    21300058: Desert 30
+    21300060: Desert 31
+    21300062: Desert 32
+    21300064: Desert 33
+    21300066: Desert 34
+    21300068: Desert 35
+    21300070: Desert 36
+    21300072: Desert 37
+    21300074: Desert 38
+    21300076: Desert 39
+    21300078: Desert 40
+    21300080: Desert 41
+    21300082: Desert 42
+    21300084: Desert 43
+    21300086: Desert 44
+    21300088: Desert 45
+    21300090: Desert 46
+    21300092: Desert 47
+    21300094: Desert 48
+    21300096: tmw_desert_spacing_0
+    21300098: tmw_desert_spacing_1
+    21300100: tmw_desert_spacing_2
+    21300102: tmw_desert_spacing_3
+    21300104: tmw_desert_spacing_4
+    21300106: tmw_desert_spacing_5
+    21300108: tmw_desert_spacing_6
+    21300110: tmw_desert_spacing_7
+    21300112: tmw_desert_spacing_8
+    21300114: tmw_desert_spacing_9
+    21300116: tmw_desert_spacing_10
+    21300118: tmw_desert_spacing_11
+    21300120: tmw_desert_spacing_12
+    21300122: tmw_desert_spacing_13
+    21300124: tmw_desert_spacing_14
+    21300126: tmw_desert_spacing_15
+    21300128: tmw_desert_spacing_16
+    21300130: tmw_desert_spacing_17
+    21300132: tmw_desert_spacing_18
+    21300134: tmw_desert_spacing_19
+    21300136: tmw_desert_spacing_20
+    21300138: tmw_desert_spacing_21
+    21300140: tmw_desert_spacing_22
+    21300142: tmw_desert_spacing_23
+    21300144: tmw_desert_spacing_24
+    21300146: tmw_desert_spacing_25
+    21300148: tmw_desert_spacing_26
+    21300150: tmw_desert_spacing_27
+    21300152: tmw_desert_spacing_28
+    21300154: tmw_desert_spacing_29
+    21300156: tmw_desert_spacing_30
+    21300158: tmw_desert_spacing_31
+    21300160: tmw_desert_spacing_32
+    21300162: tmw_desert_spacing_33
+    21300164: tmw_desert_spacing_34
+    21300166: tmw_desert_spacing_35
+    21300168: tmw_desert_spacing_36
+    21300170: tmw_desert_spacing_37
+    21300172: tmw_desert_spacing_38
+    21300174: tmw_desert_spacing_39
+    21300176: tmw_desert_spacing_40
+    21300178: tmw_desert_spacing_41
+    21300180: tmw_desert_spacing_42
+    21300182: tmw_desert_spacing_43
+    21300184: tmw_desert_spacing_44
+    21300186: tmw_desert_spacing_45
+    21300188: tmw_desert_spacing_46
+    21300190: tmw_desert_spacing_47
+    21300192: tmw_desert_spacing [0]
+    21300194: tmw_desert_spacing [1]
+    21300196: tmw_desert_spacing [2]
+    21300198: tmw_desert_spacing [3]
+    21300200: tmw_desert_spacing [4]
+    21300202: tmw_desert_spacing [5]
+    21300204: tmw_desert_spacing [6]
+    21300206: tmw_desert_spacing [7]
+    21300208: tmw_desert_spacing [8]
+    21300210: tmw_desert_spacing [9]
+    21300212: tmw_desert_spacing [10]
+    21300214: tmw_desert_spacing [11]
+    21300216: tmw_desert_spacing [12]
+    21300218: tmw_desert_spacing [13]
+    21300220: tmw_desert_spacing [14]
+    21300222: tmw_desert_spacing [15]
+    21300224: tmw_desert_spacing [16]
+    21300226: tmw_desert_spacing [17]
+    21300228: tmw_desert_spacing [18]
+    21300230: tmw_desert_spacing [19]
+    21300232: tmw_desert_spacing [20]
+    21300234: tmw_desert_spacing [21]
+    21300236: tmw_desert_spacing [22]
+    21300238: tmw_desert_spacing [23]
+    21300240: tmw_desert_spacing [24]
+    21300242: tmw_desert_spacing [25]
+    21300244: tmw_desert_spacing [26]
+    21300246: tmw_desert_spacing [27]
+    21300248: tmw_desert_spacing [28]
+    21300250: tmw_desert_spacing [29]
+    21300252: tmw_desert_spacing [30]
+    21300254: tmw_desert_spacing [31]
+    21300256: tmw_desert_spacing [32]
+    21300258: tmw_desert_spacing [33]
+    21300260: tmw_desert_spacing [34]
+    21300262: tmw_desert_spacing [35]
+    21300264: tmw_desert_spacing [36]
+    21300266: tmw_desert_spacing [37]
+    21300268: tmw_desert_spacing [38]
+    21300270: tmw_desert_spacing [39]
+    21300272: tmw_desert_spacing [40]
+    21300274: tmw_desert_spacing [41]
+    21300276: tmw_desert_spacing [42]
+    21300278: tmw_desert_spacing [43]
+    21300280: tmw_desert_spacing [44]
+    21300282: tmw_desert_spacing [45]
+    21300284: tmw_desert_spacing [46]
+    21300286: tmw_desert_spacing [47]
+    21300288: tmw_desert_spacing::0
+    21300290: tmw_desert_spacing::1
+    21300292: tmw_desert_spacing::2
+    21300294: tmw_desert_spacing::3
+    21300296: tmw_desert_spacing::4
+    21300298: tmw_desert_spacing::5
+    21300300: tmw_desert_spacing::6
+    21300302: tmw_desert_spacing::7
+    21300304: tmw_desert_spacing::8
+    21300306: tmw_desert_spacing::9
+    21300308: tmw_desert_spacing::10
+    21300310: tmw_desert_spacing::11
+    21300312: tmw_desert_spacing::12
+    21300314: tmw_desert_spacing::13
+    21300316: tmw_desert_spacing::14
+    21300318: tmw_desert_spacing::15
+    21300320: tmw_desert_spacing::16
+    21300322: tmw_desert_spacing::17
+    21300324: tmw_desert_spacing::18
+    21300326: tmw_desert_spacing::19
+    21300328: tmw_desert_spacing::20
+    21300330: tmw_desert_spacing::21
+    21300332: tmw_desert_spacing::22
+    21300334: tmw_desert_spacing::23
+    21300336: tmw_desert_spacing::24
+    21300338: tmw_desert_spacing::25
+    21300340: tmw_desert_spacing::26
+    21300342: tmw_desert_spacing::27
+    21300344: tmw_desert_spacing::28
+    21300346: tmw_desert_spacing::29
+    21300348: tmw_desert_spacing::30
+    21300350: tmw_desert_spacing::31
+    21300352: tmw_desert_spacing::32
+    21300354: tmw_desert_spacing::33
+    21300356: tmw_desert_spacing::34
+    21300358: tmw_desert_spacing::35
+    21300360: tmw_desert_spacing::36
+    21300362: tmw_desert_spacing::37
+    21300364: tmw_desert_spacing::38
+    21300366: tmw_desert_spacing::39
+    21300368: tmw_desert_spacing::40
+    21300370: tmw_desert_spacing::41
+    21300372: tmw_desert_spacing::42
+    21300374: tmw_desert_spacing::43
+    21300376: tmw_desert_spacing::44
+    21300378: tmw_desert_spacing::45
+    21300380: tmw_desert_spacing::46
+    21300382: tmw_desert_spacing::47
+    21300384: tmw_desert_spacing::000
+    21300386: tmw_desert_spacing::001
+    21300388: tmw_desert_spacing::002
+    21300390: tmw_desert_spacing::003
+    21300392: tmw_desert_spacing::004
+    21300394: tmw_desert_spacing::005
+    21300396: tmw_desert_spacing::006
+    21300398: tmw_desert_spacing::007
+    21300400: tmw_desert_spacing::008
+    21300402: tmw_desert_spacing::009
+    21300404: tmw_desert_spacing::010
+    21300406: tmw_desert_spacing::011
+    21300408: tmw_desert_spacing::012
+    21300410: tmw_desert_spacing::013
+    21300412: tmw_desert_spacing::014
+    21300414: tmw_desert_spacing::015
+    21300416: tmw_desert_spacing::016
+    21300418: tmw_desert_spacing::017
+    21300420: tmw_desert_spacing::018
+    21300422: tmw_desert_spacing::019
+    21300424: tmw_desert_spacing::020
+    21300426: tmw_desert_spacing::021
+    21300428: tmw_desert_spacing::022
+    21300430: tmw_desert_spacing::023
+    21300432: tmw_desert_spacing::024
+    21300434: tmw_desert_spacing::025
+    21300436: tmw_desert_spacing::026
+    21300438: tmw_desert_spacing::027
+    21300440: tmw_desert_spacing::028
+    21300442: tmw_desert_spacing::029
+    21300444: tmw_desert_spacing::030
+    21300446: tmw_desert_spacing::031
+    21300448: tmw_desert_spacing::032
+    21300450: tmw_desert_spacing::033
+    21300452: tmw_desert_spacing::034
+    21300454: tmw_desert_spacing::035
+    21300456: tmw_desert_spacing::036
+    21300458: tmw_desert_spacing::037
+    21300460: tmw_desert_spacing::038
+    21300462: tmw_desert_spacing::039
+    21300464: tmw_desert_spacing::040
+    21300466: tmw_desert_spacing::041
+    21300468: tmw_desert_spacing::042
+    21300470: tmw_desert_spacing::043
+    21300472: tmw_desert_spacing::044
+    21300474: tmw_desert_spacing::045
+    21300476: tmw_desert_spacing::046
+    21300478: tmw_desert_spacing::047
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 32
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: tmw_desert_spacing::000
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::001
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::002
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::003
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::004
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::005
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::006
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::007
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 166
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::008
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::009
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::010
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::011
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::012
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::013
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::014
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::015
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 133
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::016
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::017
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::018
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::019
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::020
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::021
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::022
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::023
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 100
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::024
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::025
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::026
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::027
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::028
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::029
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::030
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::031
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 67
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::032
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::033
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::034
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::035
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::036
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::037
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::038
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::039
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 34
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::040
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::041
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::042
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::043
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::044
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::045
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::046
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: tmw_desert_spacing::047
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
