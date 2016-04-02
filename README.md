@@ -4,7 +4,9 @@ A set of utilities for working with [Tiled](http://mapeditor.org) maps in Unity.
 
 *Note: This is very much a WIP. Lots of things are yet to be implemented.*
 
-The goal of this is to be an editor tool (no runtime scripts) that can import a Tiled TMX map and produce a usable game scene. The tool converts maps from Tiled:
+The goal of this is to be an editor tool (no runtime scripts) that can import a Tiled TMX map and produce a usable game scene. Hence everything is built out into standard Unity objects and the tools attempt to incorporate the best of Tiled with the best of Unity, such as leveraging Unity prefabs while allowing Tiled objects to override properties in the prefabs.
+
+The tool converts maps from Tiled:
 
 ![Tiled](./Readme_Tiled.png)
 
@@ -32,10 +34,13 @@ This is the main editor window for importing a TMX map. It's a pretty simple pro
 2. Provide a path to a TMX file in your Assets folder. The little `...` button will show you a file dialog to make this easier.
 3. Click `Convert` and it will build out all your game objects.
 
-Here's how things are (currently) translated:
+Here's how the conversion process currently works:
 
-- All layers are represented as Z-ordered objects in the map root. Image layers are not currently supported.
-- Tile layers generate 1 sprite per tile and are created underneath the layer objects.
-- Objects in object groups are created by looking for a prefab in the directory containing the TMX file (or child directories) that has a file name equivalent to the `Type` property of the object. In the example above, the door objects have a `Type` of "Door" and so the converter finds the `Door` prefab and instantiates it and places it.
-
-A primary driving goal here is that all TMX handling is done in the editor only; you shouldn't have to ship any Tiled specific code or files (TMX or TSX) with your game. Hence everything is built out into standard Unity objects.
+1. Iterate all layers in the map. Create a new GameObject for the layer using the Z axis to control layering. Then do type specific logic:
+  - For tile layers, generate 1 sprite per tile underneath the layer objects. Blank spaces simply don't generate sprites, thus you can have a large sparse map and it doesn't create tons of unnecessary empty sprites in your scene.
+  - For object groups:
+    1. Instantiate prefabs for each object by looking for a prefab asset in the directory containing the TMX file (or child directories) that has a file name equivalent to the `Type` property of the object. In the example above, the door objects have a `Type` of `Door` and so the converter finds the `Door` prefab and instantiates it and places it.
+      - Objects that have no type are ignored.
+      - Objects with a type that doesn't have a matching prefab generates an error.
+    2. Scan all `MonoBehaviour` components on the object. On each of those scripts, it attempts to match each of the properties for the TMX object up to the serialized properties of the script object. If found, it will update the script to the value found in TMX. This allows your TMX files to drive setting values on the prefabs instantiated, such that you can setup properties in Tiled that carry over to Unity, allowing you to centralize level editing in Tiled.
+2. Iterate all `MonoBehaviour` components on all created objects and invoke the `OnCreatedByTiledUtilities` method giving them a chance to finish any initialization, such as establishing references to other created objects, changing their default sprite, or anything else.

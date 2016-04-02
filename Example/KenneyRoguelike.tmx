@@ -15,6 +15,10 @@
  </layer>
  <objectgroup name="Objects">
   <object id="6" type="Door" gid="33" x="112" y="192" width="16" height="16"/>
-  <object id="7" type="Door" gid="33" x="168" y="166.5" width="16" height="16"/>
+  <object id="7" type="Door" gid="33" x="168" y="166.5" width="16" height="16">
+   <properties>
+    <property name="Default Open" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
