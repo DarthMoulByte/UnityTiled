@@ -21,16 +21,9 @@ public class TiledMapConverter : EditorWindow
 
             if (GUILayout.Button("..."))
             {
-                var file = EditorUtility.OpenFilePanel("Choose TMX File", Application.dataPath, "tmx");
+                var file = EditorUtility.OpenFilePanel("Choose TMX File", Application.dataPath, "tmx,xml");
                 if (!string.IsNullOrEmpty(file))
-                {
-                    _tmxFile = file.Replace(Application.dataPath, "");
-                    if (_tmxFile.StartsWith("/") || _tmxFile.StartsWith("\\"))
-                    {
-                        _tmxFile = _tmxFile.Substring(1);
-                    }
-                    _tmxFile = Path.Combine("Assets", _tmxFile);
-                }
+                    _tmxFile = GetAssetPath(file);
             }
         }
 
@@ -78,6 +71,18 @@ public class TiledMapConverter : EditorWindow
         }
     }
 
+    private static string GetAssetPath(string file)
+    {
+        file = Path.GetFullPath(file);
+        file = file.Replace(Application.dataPath, "");
+        if (file.StartsWith("/") || file.StartsWith("\\"))
+        {
+            file = file.Substring(1);
+        }
+        file = Path.Combine("Assets", file);
+        return file;
+    }
+
     private void PrepareMapRoot()
     {
         if (!_targetObject)
@@ -97,7 +102,7 @@ public class TiledMapConverter : EditorWindow
         var tilesetSprites = new Dictionary<long, Sprite>();
         foreach (var tileset in map.tileSets)
         {
-            var sprites = AssetDatabase.LoadAllAssetsAtPath(tileset.source)
+            var sprites = AssetDatabase.LoadAllAssetsAtPath(GetAssetPath(tileset.source))
                                        .OfType<Sprite>()
                                        .ToArray();
 
