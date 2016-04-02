@@ -74,26 +74,41 @@ public class TiledMapConverter : EditorWindow
             }
 
             var layerZ = 0;
-            foreach (var layer in map.Layers)
+            foreach (var layer in map.AllLayers)
             {
                 var layerObject = new GameObject(layer.Name);
                 layerObject.transform.SetParent(_targetObject.transform);
                 layerObject.transform.SetAsFirstSibling();
                 layerObject.transform.localPosition = new Vector3(0, 0, layerZ--);
 
-                foreach (var tile in layer.Tiles)
+                var tileLayer = layer as TmxLayer;
+                if (tileLayer != null)
                 {
-                    if (tile.Gid <= 0)
+                    foreach (var tile in tileLayer.Tiles)
                     {
-                        continue;
+                        if (tile.Gid <= 0)
+                        {
+                            continue;
+                        }
+
+                        var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", tile.X, tile.Y, tile.Gid));
+                        tileObject.transform.SetParent(layerObject.transform);
+                        tileObject.transform.localPosition = new Vector3(tile.X, -tile.Y, 0);
+
+                        var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
+                        tileRenderer.sprite = tilesetSprites[tile.Gid];
                     }
+                }
 
-                    var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", tile.X, tile.Y, tile.Gid));
-                    tileObject.transform.SetParent(layerObject.transform);
-                    tileObject.transform.localPosition = new Vector3(tile.X, -tile.Y, 0);
-
-                    var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
-                    tileRenderer.sprite = tilesetSprites[tile.Gid];
+                var objectGroup = layer as TmxObjectGroup;
+                if (objectGroup != null)
+                {
+                    foreach (var obj in objectGroup.Objects)
+                    {
+                        var objGameObject = new GameObject(obj.Name);
+                        objGameObject.transform.SetParent(layerObject.transform);
+                        objGameObject.transform.localPosition = new Vector3((float)obj.X / map.TileWidth, (float)-obj.Y / map.TileHeight, 0);
+                    }
                 }
             }
         }
