@@ -1,6 +1,6 @@
 # TiledUtilities
 
-A set of utilities for working with Tiled maps in Unity.
+A set of utilities for working with [Tiled](http://mapeditor.org) maps in Unity.
 
 *Note: This is very much a WIP. Lots of things are yet to be implemented.*
 
