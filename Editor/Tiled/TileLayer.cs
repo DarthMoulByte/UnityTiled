@@ -8,17 +8,12 @@ namespace Tiled
 {
     public class TileLayer : Layer
     {
-        private readonly Tile[,] tiles;
-
-        public Tile this[int x, int y]
-        {
-            get { return tiles[x, y]; }
-        }
+        private readonly Tile[,] _tiles;
 
         internal TileLayer(XElement element)
             : base(element)
         {
-            tiles = new Tile[Width, Height];
+            _tiles = new Tile[width, height];
 
             var data = element.Element("data");
             string encoding = data.Attribute("encoding").StringValue();
@@ -36,9 +31,9 @@ namespace Tiled
 
                 using (stream) {
                     using (var br = new BinaryReader(stream)) {
-                        for (int y = 0; y < Height; y++) {
-                            for (int x = 0; x < Width; x++) {
-                                tiles[x, y] = new Tile(br.ReadUInt32());
+                        for (int y = 0; y < height; y++) {
+                            for (int x = 0; x < width; x++) {
+                                _tiles[x, y] = new Tile(br.ReadUInt32());
                             }
                         }
                     }
@@ -48,9 +43,9 @@ namespace Tiled
                 int index = 0;
                 foreach (string s in data.Value.Split(',')) {
                     uint gid = uint.Parse(s.Trim(), CultureInfo.InvariantCulture);
-                    int x = index % Width;
-                    int y = index / Width;
-                    tiles[x, y] = new Tile(gid);
+                    int x = index % width;
+                    int y = index / width;
+                    _tiles[x, y] = new Tile(gid);
                     index++;
                 }
             }
@@ -58,15 +53,20 @@ namespace Tiled
                 int index = 0;
                 foreach (var e in data.Elements("tile")) {
                     uint gid = (uint)e.Attribute("gid");
-                    int x = index % Width;
-                    int y = index / Width;
-                    tiles[x, y] = new Tile(gid);
+                    int x = index % width;
+                    int y = index / width;
+                    _tiles[x, y] = new Tile(gid);
                     index++;
                 }
             }
             else {
                 throw new Exception("Unknown encoding.");
             }
+        }
+
+        public Tile GetTile(int x, int y)
+        {
+            return _tiles[x, y];
         }
     }
 }

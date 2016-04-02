@@ -59,9 +59,9 @@ public class TiledMapConverter : EditorWindow
             var map = Map.FromFile(_tmxFile);
 
             var tilesetSprites = new Dictionary<long, Sprite>();
-            foreach (var tileset in map.TileSets)
+            foreach (var tileset in map.tileSets)
             {
-                var sprites = AssetDatabase.LoadAllAssetsAtPath(tileset.Source)
+                var sprites = AssetDatabase.LoadAllAssetsAtPath(tileset.source)
                                            .OfType<Sprite>()
                                            .ToArray();
 
@@ -69,14 +69,14 @@ public class TiledMapConverter : EditorWindow
                 {
                     var sprite = sprites[i];
                     var spriteGid = int.Parse(sprite.name.Substring(sprite.name.LastIndexOf("_") + 1));
-                    tilesetSprites[tileset.FirstGid + spriteGid - 1] = sprite;
+                    tilesetSprites[tileset.firstGid + spriteGid - 1] = sprite;
                 }
             }
 
             var layerZ = 0;
-            foreach (var layer in map.Layers)
+            foreach (var layer in map.layers)
             {
-                var layerObject = new GameObject(layer.Name);
+                var layerObject = new GameObject(layer.name);
                 layerObject.transform.SetParent(_targetObject.transform);
                 layerObject.transform.SetAsFirstSibling();
                 layerObject.transform.localPosition = new Vector3(0, 0, layerZ--);
@@ -84,22 +84,22 @@ public class TiledMapConverter : EditorWindow
                 var tileLayer = layer as TileLayer;
                 if (tileLayer != null)
                 {
-                    for (int y = 0; y < tileLayer.Height; y++)
+                    for (int y = 0; y < tileLayer.height; y++)
                     {
-                        for (int x = 0; x < tileLayer.Width; x++)
+                        for (int x = 0; x < tileLayer.width; x++)
                         {
-                            var tile = tileLayer[x, y];
-                            if (tile.Gid <= 0)
+                            var tile = tileLayer.GetTile(x, y);
+                            if (tile.gid <= 0)
                             {
                                 continue;
                             }
 
-                            var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.Gid));
+                            var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.gid));
                             tileObject.transform.SetParent(layerObject.transform);
                             tileObject.transform.localPosition = new Vector3(x, -y, 0);
 
                             var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
-                            tileRenderer.sprite = tilesetSprites[tile.Gid];
+                            tileRenderer.sprite = tilesetSprites[tile.gid];
                         }
                     }
                 }
@@ -107,36 +107,36 @@ public class TiledMapConverter : EditorWindow
                 var objectGroup = layer as ObjectGroup;
                 if (objectGroup != null)
                 {
-                    foreach (var obj in objectGroup.Objects)
+                    foreach (var obj in objectGroup.objects)
                     {
-                        if (string.IsNullOrEmpty(obj.Type))
+                        if (string.IsNullOrEmpty(obj.type))
                         {
                             // TODO: What could we do with objects that don't have types?
                             continue;
                         }
 
-                        var prefab = FindPrefabForObject(obj.Type);
+                        var prefab = FindPrefabForObject(obj.type);
                         if (!prefab)
                         {
-                            Debug.LogError(string.Format("Did not have a prefab for object '{0}' of type '{1}' on layer '{2}'", obj.Name, obj.Type, layer.Name));
+                            Debug.LogError(string.Format("Did not have a prefab for object '{0}' of type '{1}' on layer '{2}'", obj.name, obj.type, layer.name));
                             continue;
                         }
 
                         var objGameObject = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
 
-                        string name = obj.Name;
+                        string name = obj.name;
                         if (string.IsNullOrEmpty(name))
                         {
-                            name = obj.Type;
+                            name = obj.type;
                         }
                         else
                         {
-                            name = string.Format("{0} ({1})", obj.Name, obj.Type);
+                            name = string.Format("{0} ({1})", obj.name, obj.type);
                         }
 
                         objGameObject.name = name;
                         objGameObject.transform.SetParent(layerObject.transform);
-                        objGameObject.transform.localPosition = new Vector3((float)obj.Position.x / map.TileWidth, (float)-obj.Position.y / map.TileHeight + 1, 0);
+                        objGameObject.transform.localPosition = new Vector3((float)obj.x / map.tileWidth, (float)-obj.y / map.tileHeight + 1, 0);
 
                     }
                 }

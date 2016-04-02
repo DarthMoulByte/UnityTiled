@@ -9,13 +9,12 @@ namespace Tiled
 {
     public class PolyLineObject : Object
     {
-        public ReadOnlyCollection<Vector2> Points { get; private set; }
+        public ReadOnlyCollection<Vector2> points { get; private set; }
 
         internal PolyLineObject(XElement element)
             : base(element)
         {
             var points = new List<Vector2>();
-            Points = new ReadOnlyCollection<Vector2>(points);
 
             string pointsData = element.Element("polyline").Attribute("points").StringValue();
             foreach (string p in pointsData.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)) {
@@ -23,6 +22,8 @@ namespace Tiled
                 points.Add(new Vector2(float.Parse(pSplit[0], CultureInfo.InvariantCulture),
                                        float.Parse(pSplit[1], CultureInfo.InvariantCulture)));
             }
+
+            this.points = new ReadOnlyCollection<Vector2>(points);
         }
     }
 }

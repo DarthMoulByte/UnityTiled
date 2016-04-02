@@ -5,26 +5,26 @@ namespace Tiled
 {
     public abstract class Layer
     {
-        public int Height { get; private set; }
-        public bool IsVisible { get; private set; }
-        public string Name { get; private set; }
-        public float Opacity { get; private set; }
-        public PropertyCollection Properties { get; private set; }
-        public int Width { get; private set; }
+        public int height { get; private set; }
+        public bool visible { get; private set; }
+        public string name { get; private set; }
+        public float opacity { get; private set; }
+        public PropertyCollection properties { get; private set; }
+        public int width { get; private set; }
 
         protected Layer(XElement element)
         {
-            Name = element.Attribute("name").StringValue();
-            IsVisible = element.Attribute("visible").BoolValue(true);
-            Opacity = element.Attribute("opacity").FloatValue(1.0f);
-            Width = element.Attribute("width").IntValue();
-            Height = element.Attribute("height").IntValue();
-            Properties = new PropertyCollection(element.Element("properties"));
+            name = element.Attribute("name").StringValue();
+            visible = element.Attribute("visible").BoolValue(true);
+            opacity = element.Attribute("opacity").FloatValue(1.0f);
+            width = element.Attribute("width").IntValue();
+            height = element.Attribute("height").IntValue();
+            properties = new PropertyCollection(element.Element("properties"));
         }
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", Name, GetType().Name);
+            return string.Format("{0} ({1})", name, GetType().Name);
         }
 
         internal static Layer ReadLayer(XElement element)

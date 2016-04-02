@@ -5,42 +5,42 @@ namespace Tiled
 {
     public class PropertyValue
     {
-        private readonly string rawValue;
+        private readonly string _value;
 
         internal PropertyValue(string value)
         {
-            rawValue = value;
+            _value = value;
         }
 
         public bool AsBool()
         {
-            return bool.Parse(rawValue);
+            return bool.Parse(_value);
         }
 
         public T AsEnum<T>()
         {
-            return (T)Enum.Parse(typeof(T), rawValue, true);
+            return (T)Enum.Parse(typeof(T), _value, true);
         }
 
         public float AsFloat()
         {
-            return float.Parse(rawValue, CultureInfo.InvariantCulture);
+            return float.Parse(_value, CultureInfo.InvariantCulture);
         }
 
         public int AsInt()
         {
-            return int.Parse(rawValue, CultureInfo.InvariantCulture);
+            return int.Parse(_value, CultureInfo.InvariantCulture);
         }
 
         public string AsString()
         {
-            return rawValue;
+            return _value;
         }
 
         public uint AsUInt()
         {
-            if (rawValue.Contains("#")) {
-                string color = rawValue.Substring(1);
+            if (_value.Contains("#")) {
+                string color = _value.Substring(1);
                 if (color.Length != 8) {
                     // add alpha channel
                     color = "FF" + color;
@@ -48,7 +48,7 @@ namespace Tiled
 
                 return uint.Parse(color, NumberStyles.HexNumber);
             }
-            return uint.Parse(rawValue, CultureInfo.InvariantCulture);
+            return uint.Parse(_value, CultureInfo.InvariantCulture);
         }
     }
 }

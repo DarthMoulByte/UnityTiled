@@ -8,16 +8,6 @@ namespace Tiled
     {
         private readonly Dictionary<string, Property> properties = new Dictionary<string, Property>();
 
-        public bool IsEmpty
-        {
-            get { return properties.Count == 0; }
-        }
-
-        public Property this[string key]
-        {
-            get { return properties[key]; }
-        }
-
         internal PropertyCollection()
             : this(null) {}
 
@@ -30,19 +20,9 @@ namespace Tiled
             }
         }
 
-        public bool ContainsKey(string key)
-        {
-            return properties.ContainsKey(key);
-        }
-
         public IEnumerator<Property> GetEnumerator()
         {
             return properties.Values.GetEnumerator();
-        }
-
-        public bool TryGetValue(string key, out Property property)
-        {
-            return properties.TryGetValue(key, out property);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

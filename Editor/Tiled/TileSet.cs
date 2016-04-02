@@ -9,72 +9,51 @@ namespace Tiled
         private readonly Dictionary<uint, PropertyCollection> tileProperties =
             new Dictionary<uint, PropertyCollection>();
 
-        public uint FirstGid { get; private set; }
-        public int Height { get; private set; }
-        public int Margin { get; private set; }
+        public uint firstGid { get; private set; }
+        public int height { get; private set; }
+        public int margin { get; private set; }
 
-        public string Name { get; private set; }
-        public string Source { get; private set; }
-        public int Spacing { get; private set; }
-        public int TileCount { get; private set; }
-        public int TileHeight { get; private set; }
-
-        public int TilesX { get; private set; }
-        public int TilesY { get; private set; }
-        public int TileWidth { get; private set; }
-
-        public string TsxFile { get; private set; }
-        public int Width { get; private set; }
+        public string name { get; private set; }
+        public string source { get; private set; }
+        public int spacing { get; private set; }
+        public int tileHeight { get; private set; }
+        public int tileWidth { get; private set; }
+        public string tsxFile { get; private set; }
+        public int width { get; private set; }
 
         internal TileSet(XElement element, string rootDir)
         {
-            FirstGid = element.Attribute("firstgid").UIntValue();
+            firstGid = element.Attribute("firstgid").UIntValue();
 
             var tileSetElem = element;
 
             if (element.Attribute("source") != null) {
-                TsxFile = Path.Combine(rootDir, element.Attribute("source").Value);
-                rootDir = Path.GetDirectoryName(TsxFile);
-                var tsxDoc = XDocument.Load(File.OpenRead(TsxFile));
+                tsxFile = Path.Combine(rootDir, element.Attribute("source").Value);
+                rootDir = Path.GetDirectoryName(tsxFile);
+                var tsxDoc = XDocument.Load(File.OpenRead(tsxFile));
                 tileSetElem = tsxDoc.Root;
             }
 
             var imageElem = tileSetElem.Element("image");
-            Name = tileSetElem.Attribute("name").StringValue();
-            TileWidth = tileSetElem.Attribute("tilewidth").IntValue();
-            TileHeight = tileSetElem.Attribute("tileheight").IntValue();
-            Spacing = tileSetElem.Attribute("spacing").IntValue();
-            Margin = tileSetElem.Attribute("margin").IntValue();
+            name = tileSetElem.Attribute("name").StringValue();
+            tileWidth = tileSetElem.Attribute("tilewidth").IntValue();
+            tileHeight = tileSetElem.Attribute("tileheight").IntValue();
+            spacing = tileSetElem.Attribute("spacing").IntValue();
+            margin = tileSetElem.Attribute("margin").IntValue();
 
-            Source = Path.Combine(rootDir, imageElem.Attribute("source").StringValue());
-            Width = imageElem.Attribute("width").IntValue();
-            Height = imageElem.Attribute("height").IntValue();
+            source = Path.Combine(rootDir, imageElem.Attribute("source").StringValue());
+            width = imageElem.Attribute("width").IntValue();
+            height = imageElem.Attribute("height").IntValue();
 
             foreach (var t in tileSetElem.Elements("tile")) {
                 tileProperties[t.Attribute("id").UIntValue()] = new PropertyCollection(t.Element("properties"));
             }
-
-            TilesX = (Width - Margin + Spacing) / (TileWidth + Spacing);
-            TilesY = (Height - Margin + Spacing) / (TileHeight + Spacing);
-            TileCount = TilesX * TilesY;
-        }
-
-        public Rectangle GetTile(uint gid)
-        {
-            int localId = (int)(gid - FirstGid);
-
-            int y = localId / TilesX;
-            int x = localId - y * TilesX;
-            return new Rectangle(Margin + Spacing + x * (TileWidth + Spacing),
-                                 Margin + Spacing + y * (TileHeight + Spacing),
-                                 TileWidth,
-                                 TileHeight);
         }
 
         public PropertyCollection GetTileProperties(uint gid)
         {
             PropertyCollection c;
-            if (!tileProperties.TryGetValue(gid - FirstGid, out c)) {
+            if (!tileProperties.TryGetValue(gid - firstGid, out c)) {
                 c = new PropertyCollection();
             }
 
@@ -83,7 +62,7 @@ namespace Tiled
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", Name, Source);
+            return string.Format("{0} ({1})", name, source);
         }
     }
 }

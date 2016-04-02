@@ -5,35 +5,39 @@ namespace Tiled
 {
     public abstract class Object
     {
-        public bool IsVisible { get; private set; }
-        public string Name { get; private set; }
-        public Vector2 Position { get; private set; }
-        public PropertyCollection Properties { get; private set; }
-        public float Rotation { get; private set; }
-        public Vector2 Size { get; private set; }
-        public string Type { get; private set; }
+        public bool visible { get; private set; }
+        public string name { get; private set; }
+        public float x { get; private set; }
+        public float y { get; private set; }
+        public PropertyCollection properties { get; private set; }
+        public float rotation { get; private set; }
+        public float width { get; private set; }
+        public float height { get; private set; }
+        public string type { get; private set; }
 
         protected Object(XElement element)
         {
-            Name = element.Attribute("name").StringValue();
-            Type = element.Attribute("type").StringValue();
-            IsVisible = element.Attribute("visible").BoolValue(true);
-            Position = new Vector2(element.Attribute("x").FloatValue(), element.Attribute("y").FloatValue());
-            Size = new Vector2(element.Attribute("width").FloatValue(), element.Attribute("height").FloatValue());
-            Rotation = element.Attribute("rotation").FloatValue();
-            Properties = new PropertyCollection(element.Element("properties"));
+            name = element.Attribute("name").StringValue();
+            type = element.Attribute("type").StringValue();
+            visible = element.Attribute("visible").BoolValue(true);
+            x = element.Attribute("x").FloatValue();
+            y = element.Attribute("y").FloatValue();
+            width = element.Attribute("width").FloatValue();
+            height = element.Attribute("height").FloatValue();
+            rotation = element.Attribute("rotation").FloatValue();
+            properties = new PropertyCollection(element.Element("properties"));
         }
 
         public override string ToString()
         {
             string str = base.ToString();
 
-            if (!string.IsNullOrEmpty(Type)) {
-                str = string.Format("({0}) [{1}]", Type, str);
+            if (!string.IsNullOrEmpty(type)) {
+                str = string.Format("({0}) [{1}]", type, str);
             }
 
-            if (!string.IsNullOrEmpty(Name)) {
-                str = Name + " " + str;
+            if (!string.IsNullOrEmpty(name)) {
+                str = name + " " + str;
             }
 
             return str;

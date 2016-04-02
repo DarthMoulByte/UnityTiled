@@ -4,12 +4,12 @@ namespace Tiled
 {
     public class TileObject : Object
     {
-        public uint Gid { get; private set; }
+        public uint gid { get; private set; }
 
         internal TileObject(XElement element)
             : base(element)
         {
-            Gid = element.Attribute("gid").UIntValue();
+            gid = element.Attribute("gid").UIntValue();
         }
     }
 }
