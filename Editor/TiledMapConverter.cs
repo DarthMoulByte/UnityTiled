@@ -133,7 +133,18 @@ public class TiledMapConverter : EditorWindow
 
             objGameObject.name = GetObjectName(obj);
             objGameObject.transform.SetParent(layerObject.transform);
-            objGameObject.transform.localPosition = new Vector3(obj.x / map.tileWidth, -obj.y / map.tileHeight, 0);
+            objGameObject.transform.localPosition = new Vector3(
+                obj.x / map.tileWidth,
+                -obj.y / map.tileHeight,
+                0);
+
+            // Tiled seems to place tiled based objects with the origin at the bottom, which is
+            // different than rectangle objects. So we have to scoot tile objects up one tile.
+            if (obj is TileObject)
+            {
+                objGameObject.transform.localPosition += new Vector3(0, 1, 0);
+            }
+
             SetScriptProperties(obj, objGameObject);
         }
         return createdGameObjects;
