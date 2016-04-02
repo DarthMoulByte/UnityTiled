@@ -226,7 +226,6 @@ public class TiledMapConverter : EditorWindow
     private static List<Component> GetAllUserComponents(GameObject gameObject)
     {
         var allComponents = new List<Component>();
-        allComponents.AddRange(gameObject.GetComponents(typeof(MonoBehaviour)));
         allComponents.AddRange(gameObject.GetComponentsInChildren(typeof(MonoBehaviour)));
         return allComponents;
     }
