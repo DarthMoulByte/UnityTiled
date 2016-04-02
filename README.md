@@ -16,11 +16,15 @@ Into objects in Unity:
 
 ![Tileset Tool Window](./Readme_TilesetTool.png)
 
-This is a little editor window found in `Window->Tiled->Tileset Tool`. The purpose is to automatically set a texture to use multiple sprites and provide a faster way to cut up the texture into the necessary tiles in a way that is compatible with the map converter.
+Open with `Window->Tiled->Tileset Tool`.
+
+The purpose of this tool is to automatically set a texture to use multiple sprites and provide a faster way to cut up the texture into the necessary tiles in a way that is compatible with the map converter.
 
 ## Map Converter
 
 ![Map Converter](./Readme_MapConverter.png)
+
+Open with `Window->Tiled->Map Converter`.
 
 This is the main editor window. Provide a game object to be the root of the map or leave it blank to have one generated (note: all children are deleted!). Locate the TMX file in your asset directory and click the Convert button. All layers are represented as Z-ordered objects in the map root and each tile is added as a new Sprite.
 
