@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="KenneyRoguelike" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
+  <image source="KenneyRoguelike.png" width="968" height="526"/>
+ </tileset>
+ <layer name="Ground" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjZmBgYEHCrEDMRgG2AWJbJGxHoXmlQFyGhMspNG+k40hGBoYoII5mpI55k4DmTAbiKVQy7zTQnDNAfJZK5o3i4YUBiVYPQA==
+  </data>
+ </layer>
+ <layer name="Decorations" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgYkMnEwJAFxNlAnMOEyZdlIs28RUD1i4F4CRAvZcLkh5Fo3iigHvBACvvrjJSb1wg0z5PK8dlEBfOw+c2Dyu5sHOHpGADu4A0h
+  </data>
+ </layer>
+</map>

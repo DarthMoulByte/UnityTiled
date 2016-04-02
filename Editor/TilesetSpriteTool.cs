@@ -34,7 +34,7 @@ public class TilesetSpriteTool : EditorWindow
                 {
                     var metadata = new SpriteMetaData();
                     metadata.alignment = (int)SpriteAlignment.TopLeft;
-                    metadata.name = string.Format("{0}::{1:000}", _tilesetTexture.name, gid);
+                    metadata.name = string.Format("{0}::{1:00000}", _tilesetTexture.name, gid + 1);
                     metadata.rect = new Rect(
                         x,
                         _tilesetTexture.height - y - _tileHeight,
