@@ -28,4 +28,6 @@ This is the main editor window. Provide a game object to be the root of the map 
 
 As with all UnityCommunity scripts, TiledUtilities code is provided under the terms of the MIT License.
 
-However TiledUtilities is built on [TiledSharp](https://github.com/marshallward/TiledSharp) which is licensed under the Apache 2.0 License. TiledSharp uses [DotNetZip](https://dotnetzip.codeplex.com) which is licensed under the Ms-PL License. The exact licenses were taken from TileSharp and can be found in the `Editor/TiledSharp` directory in this repo.
+TiledUtilities is built on [TiledSharp](https://github.com/marshallward/TiledSharp) which is licensed under the Apache 2.0 License. TiledSharp uses [DotNetZip](https://dotnetzip.codeplex.com) which is licensed under the Ms-PL License. The exact licenses were taken from TileSharp and can be found in the `Editor/TiledSharp` directory in this repo.
+
+Example artwork created by [Kenney](http://kenney.nl).
