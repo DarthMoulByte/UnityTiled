@@ -4,7 +4,6 @@ using Tiled;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 
 public class TiledMapConverter : EditorWindow
 {
@@ -110,13 +109,55 @@ public class TiledMapConverter : EditorWindow
                 {
                     foreach (var obj in objectGroup.Objects)
                     {
-                        var objGameObject = new GameObject(obj.Name);
+                        if (string.IsNullOrEmpty(obj.Type))
+                        {
+                            // TODO: What could we do with objects that don't have types?
+                            continue;
+                        }
+
+                        var prefab = FindPrefabForObject(obj.Type);
+                        if (!prefab)
+                        {
+                            Debug.LogError(string.Format("Did not have a prefab for object '{0}' of type '{1}' on layer '{2}'", obj.Name, obj.Type, layer.Name));
+                            continue;
+                        }
+
+                        var objGameObject = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
+
+                        string name = obj.Name;
+                        if (string.IsNullOrEmpty(name))
+                        {
+                            name = obj.Type;
+                        }
+                        else
+                        {
+                            name = string.Format("{0} ({1})", obj.Name, obj.Type);
+                        }
+
+                        objGameObject.name = name;
                         objGameObject.transform.SetParent(layerObject.transform);
-                        objGameObject.transform.localPosition = new Vector3((float)obj.Position.x / map.TileWidth, (float)-obj.Position.y / map.TileHeight, 0);
+                        objGameObject.transform.localPosition = new Vector3((float)obj.Position.x / map.TileWidth, (float)-obj.Position.y / map.TileHeight + 1, 0);
+
                     }
                 }
             }
         }
+    }
+
+    private GameObject FindPrefabForObject(string type)
+    {
+        var guids = AssetDatabase.FindAssets(type + " t:GameObject", new[] { Path.GetDirectoryName(_tmxFile)});
+        foreach (var guid in guids)
+        {
+            var path = AssetDatabase.GUIDToAssetPath(guid);
+            var prefab = AssetDatabase.LoadMainAssetAtPath(path) as GameObject;
+            if (prefab)
+            {
+                return prefab;
+            }
+        }
+
+        return null;
     }
 
     [MenuItem("Window/Tiled/Map Converter")]
