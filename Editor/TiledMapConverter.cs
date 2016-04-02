@@ -63,12 +63,13 @@ public class TiledMapConverter : EditorWindow
             {
                 var sprites = AssetDatabase.LoadAllAssetsAtPath(tileset.Image.Source)
                                            .OfType<Sprite>()
-                                           .OrderBy(s => s.name)
                                            .ToArray();
 
                 for (int i = 0; i < sprites.Length; i++)
                 {
-                    tilesetSprites[tileset.FirstGid + i] = sprites[i];
+                    var sprite = sprites[i];
+                    var spriteGid = int.Parse(sprite.name.Substring(sprite.name.LastIndexOf("_") + 1));
+                    tilesetSprites[tileset.FirstGid + spriteGid - 1] = sprite;
                 }
             }
 
