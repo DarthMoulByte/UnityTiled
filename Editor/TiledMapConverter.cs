@@ -3,7 +3,6 @@ using UnityEditor;
 using Tiled;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 public class TiledMapConverter : EditorWindow
@@ -50,6 +49,7 @@ public class TiledMapConverter : EditorWindow
             foreach (var layer in map.layers)
             {
                 var layerObject = new GameObject(layer.name);
+                layerObject.isStatic = true;
                 layerObject.transform.SetParent(_targetObject.transform);
                 layerObject.transform.SetAsFirstSibling();
                 layerObject.transform.localPosition = new Vector3(0, 0, layerZ--);
@@ -83,6 +83,8 @@ public class TiledMapConverter : EditorWindow
         {
             DestroyImmediate(_targetObject.transform.GetChild(i).gameObject);
         }
+
+        _targetObject.isStatic = true;
     }
 
     private static void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer)
@@ -98,6 +100,7 @@ public class TiledMapConverter : EditorWindow
                 }
 
                 var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.gid));
+                tileObject.isStatic = true;
                 tileObject.transform.SetParent(layerObject.transform);
                 tileObject.transform.localPosition = new Vector3(x, -y, 0);
 
@@ -130,7 +133,7 @@ public class TiledMapConverter : EditorWindow
 
             objGameObject.name = GetObjectName(obj);
             objGameObject.transform.SetParent(layerObject.transform);
-            objGameObject.transform.localPosition = new Vector3((float)obj.x / map.tileWidth, (float)-obj.y / map.tileHeight + 1, 0);
+            objGameObject.transform.localPosition = new Vector3(obj.x / map.tileWidth, -obj.y / map.tileHeight, 0);
             SetScriptProperties(obj, objGameObject);
         }
         return createdGameObjects;
@@ -202,7 +205,7 @@ public class TiledMapConverter : EditorWindow
             foreach (var userScript in GetAllUserComponents(gameObject))
             {
                 // NOTE: SendMessage generates errors so reflection it is.
-                var method = userScript.GetType().GetMethod("OnCreatedByTiledUtilities", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var method = userScript.GetType().GetMethod("OnTmxMapImported", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                 if (method != null)
                     method.Invoke(userScript, null);
             }
@@ -252,7 +255,7 @@ public class TiledMapConverter : EditorWindow
 
     private GameObject FindPrefabForObject(string type)
     {
-        var guids = AssetDatabase.FindAssets(type + " t:GameObject", new[] { Path.GetDirectoryName(_tmxFile)});
+        var guids = AssetDatabase.FindAssets(type + " t:GameObject");
         foreach (var guid in guids)
         {
             var path = AssetDatabase.GUIDToAssetPath(guid);

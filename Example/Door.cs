@@ -35,7 +35,7 @@ public class Door : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = _closedSprite;
     }
 
-    void OnCreatedByTiledUtilities()
+    void OnTmxMapImported()
     {
         SetCorrectSprite();
     }
