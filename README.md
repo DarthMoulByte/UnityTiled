@@ -8,15 +8,15 @@ The goal of this is to be an editor tool (no runtime scripts) that can import a 
 
 The tool converts maps from Tiled:
 
-![Tiled](./Readme_Tiled.png)
+![Tiled](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_Tiled.png)
 
 Into objects in Unity:
 
-![Tiled](./Readme_Unity.png)
+![Tiled](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_Unity.png)
 
 ## Tileset Tool
 
-![Tileset Tool Window](./Readme_TilesetTool.png)
+![Tileset Tool Window](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_TilesetTool.png)
 
 Open with `Window->Tiled->Tileset Tool`.
 
@@ -24,7 +24,7 @@ The purpose of this tool is to automatically set a texture to use multiple sprit
 
 ## Map Converter
 
-![Map Converter](./Readme_MapConverter.png)
+![Map Converter](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_MapConverter.png)
 
 Open with `Window->Tiled->Map Converter`.
 
