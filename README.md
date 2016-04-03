@@ -45,7 +45,9 @@ Here's how the import process works:
       - Objects that have no type are ignored.
       - Objects with a type that doesn't have a matching prefab generates an error.
     2. Scan all `MonoBehaviour` components on the object. On each of those scripts, it attempts to match each of the properties for the TMX object up to the serialized properties of the script object. If found, it will update the script to the value found in TMX. This allows your TMX files to drive setting values on the prefabs instantiated, such that you can setup properties in Tiled that carry over to Unity, allowing you to centralize level editing in Tiled.
-2. Iterate all `MonoBehaviour` components on all created objects and invoke the `OnTmxMapImported` method giving them a chance to finish any initialization, such as establishing references to other created objects, changing their default sprite, or anything else.
+2. Iterate all `MonoBehaviour` components on all created objects (and their children) and invoke the `OnTmxMapImported` method giving them a chance to finish any initialization, such as establishing references to other created objects, changing their default sprite, or anything else.
+3. Iterate all `MonoBehaviour` components on the `TiledMap` root object and invoke the `OnTmxMapImported` method to provide a top level final method that can be used for any remaining logic for the map.
+
 
 ## Credits
 
