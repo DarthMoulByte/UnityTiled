@@ -31,9 +31,7 @@ public class TiledMapEditor : Editor
             if (GUILayout.Button("Import"))
             {
                 for (int i = map.transform.childCount - 1; i >= 0; i--)
-                {
                     DestroyImmediate(map.transform.GetChild(i).gameObject);
-                }
 
                 var tmxMap = Map.FromFile(map.tmxFile);
                 var spriteCache = new SpriteCache(tmxMap);
@@ -51,18 +49,17 @@ public class TiledMapEditor : Editor
 
                     var tileLayer = layer as TileLayer;
                     if (tileLayer != null)
-                    {
                         CreateSpritesForLayer(spriteCache, layerObject, tileLayer);
-                    }
 
                     var objectGroup = layer as ObjectGroup;
                     if (objectGroup != null)
-                    {
                         allCreatedObjects.AddRange(CreateObjects(tmxMap, layer, layerObject, objectGroup));
-                    }
                 }
 
-                SendOnCreatedByTiledUtilitiesMessage(allCreatedObjects);
+                SendOnCreatedByTiledUtilitiesMessage(allCreatedObjects, true);
+
+                // When sending the message to the map, don't send it to all the children again
+                SendOnCreatedByTiledUtilitiesMessage(map.gameObject, false);
             }
         }
     }
@@ -132,7 +129,7 @@ public class TiledMapEditor : Editor
 
     private void SetScriptProperties(Tiled.Object obj, GameObject objGameObject)
     {
-        foreach (var userScript in GetAllUserComponents(objGameObject))
+        foreach (var userScript in GetAllUserComponents(objGameObject, true))
         {
             var target = new SerializedObject(userScript);
 
@@ -189,25 +186,31 @@ public class TiledMapEditor : Editor
         return name;
     }
 
-    private static void SendOnCreatedByTiledUtilitiesMessage(List<GameObject> createdGameObjects)
+    private static void SendOnCreatedByTiledUtilitiesMessage(List<GameObject> gameObjects, bool includeChildren)
     {
-        foreach (var gameObject in createdGameObjects)
+        foreach (var gameObject in gameObjects)
         {
-            foreach (var userScript in GetAllUserComponents(gameObject))
-            {
-                // NOTE: SendMessage generates errors so reflection it is.
-                var method = userScript.GetType().GetMethod("OnTmxMapImported", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                if (method != null)
-                    method.Invoke(userScript, null);
-            }
+            SendOnCreatedByTiledUtilitiesMessage(gameObject, includeChildren);
         }
     }
 
-    private static List<Component> GetAllUserComponents(GameObject gameObject)
+    private static void SendOnCreatedByTiledUtilitiesMessage(GameObject gameObject, bool includeChildren)
     {
-        var allComponents = new List<Component>();
-        allComponents.AddRange(gameObject.GetComponentsInChildren(typeof(MonoBehaviour)));
-        return allComponents;
+        foreach (var userScript in GetAllUserComponents(gameObject, includeChildren))
+        {
+            // NOTE: SendMessage generates errors so reflection it is.
+            var method = userScript.GetType().GetMethod("OnTmxMapImported", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (method != null)
+                method.Invoke(userScript, null);
+        }
+    }
+
+    private static Component[] GetAllUserComponents(GameObject gameObject, bool includeChildren)
+    {
+        if (includeChildren)
+            return gameObject.GetComponentsInChildren(typeof(MonoBehaviour));
+        else
+            return gameObject.GetComponents(typeof(MonoBehaviour));
     }
 
     private SerializedProperty FindSerializedPropertyForObject(SerializedObject target, string propertyName)
