@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace TiledUtilities
@@ -46,6 +47,12 @@ namespace TiledUtilities
         {
             var doc = XDocument.Load(File.OpenRead(file));
             return new Map(doc, Path.GetDirectoryName(file));
+        }
+
+        public Dictionary<string, string> GetProperties(uint gid)
+        {
+            var propertyCollection = tileSets.Select(ts => ts.GetTileProperties(gid)).FirstOrDefault(p => p != null);
+            return propertyCollection.GetDictionary();
         }
     }
 }

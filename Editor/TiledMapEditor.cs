@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace TiledUtilities
@@ -50,22 +51,28 @@ namespace TiledUtilities
 
                         var tileLayer = layer as TileLayer;
                         if (tileLayer != null)
-                            CreateSpritesForLayer(spriteCache, layerObject, tileLayer);
+                            CreateSpritesForLayer(spriteCache, layerObject, tileLayer, tmxMap);
 
                         var objectGroup = layer as ObjectGroup;
                         if (objectGroup != null)
                             allCreatedObjects.AddRange(CreateObjects(tmxMap, layer, layerObject, objectGroup));
                     }
 
-                    SendOnCreatedByTiledUtilitiesMessage(allCreatedObjects, true);
+                    // Inform each created prefab individually know that the map was imported
+                    SendOnTmxMapImported(allCreatedObjects, true);
 
                     // When sending the message to the map, don't send it to all the children again
-                    SendOnCreatedByTiledUtilitiesMessage(map.gameObject, false);
+                    SendOnTmxMapImported(map.gameObject, false);
+                    
+                    // Remove all TileProperties components; they're just created for post processing the import process
+                    var tilePropertyComponents = map.GetComponentsInChildren<TileProperties>().ToList();
+                    foreach (var comp in tilePropertyComponents)
+                        DestroyImmediate(comp);
                 }
             }
         }
 
-        private static void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer)
+        private static void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer, Map tmxMap)
         {
             for (int y = 0; y < tileLayer.height; y++)
             {
@@ -73,9 +80,7 @@ namespace TiledUtilities
                 {
                     var tile = tileLayer.GetTile(x, y);
                     if (tile.gid <= 0)
-                    {
                         continue;
-                    }
 
                     var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.gid));
                     tileObject.isStatic = true;
@@ -84,6 +89,9 @@ namespace TiledUtilities
 
                     var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
                     tileRenderer.sprite = spriteCache.GetSprite(tile.gid);
+                    
+                    var tileProperties = tileObject.AddComponent<TileProperties>();
+                    tileProperties.SetProperties(tmxMap.GetProperties(tile.gid));
                 }
             }
         }
@@ -93,11 +101,9 @@ namespace TiledUtilities
             var createdGameObjects = new List<GameObject>();
             foreach (var obj in objectGroup.objects)
             {
+                // TODO: What could we do with objects that don't have types?
                 if (string.IsNullOrEmpty(obj.type))
-                {
-                    // TODO: What could we do with objects that don't have types?
                     continue;
-                }
 
                 var prefab = FindPrefabForObject(obj.type);
                 if (!prefab)
@@ -119,9 +125,7 @@ namespace TiledUtilities
                 // Tiled seems to place tiled based objects with the origin at the bottom, which is
                 // different than rectangle objects. So we have to scoot tile objects up one tile.
                 if (obj is TileObject)
-                {
                     objGameObject.transform.localPosition += new Vector3(0, 1, 0);
-                }
 
                 SetScriptProperties(obj, objGameObject);
             }
@@ -176,26 +180,20 @@ namespace TiledUtilities
         {
             string name = obj.name;
             if (string.IsNullOrEmpty(name))
-            {
                 name = obj.type;
-            }
             else
-            {
                 name = string.Format("{0} ({1})", obj.name, obj.type);
-            }
 
             return name;
         }
 
-        private static void SendOnCreatedByTiledUtilitiesMessage(List<GameObject> gameObjects, bool includeChildren)
+        private static void SendOnTmxMapImported(List<GameObject> gameObjects, bool includeChildren)
         {
             foreach (var gameObject in gameObjects)
-            {
-                SendOnCreatedByTiledUtilitiesMessage(gameObject, includeChildren);
-            }
+                SendOnTmxMapImported(gameObject, includeChildren);
         }
 
-        private static void SendOnCreatedByTiledUtilitiesMessage(GameObject gameObject, bool includeChildren)
+        private static void SendOnTmxMapImported(GameObject gameObject, bool includeChildren)
         {
             foreach (var userScript in GetAllUserComponents(gameObject, includeChildren))
             {
@@ -255,9 +253,7 @@ namespace TiledUtilities
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 var prefab = AssetDatabase.LoadMainAssetAtPath(path) as GameObject;
                 if (prefab)
-                {
                     return prefab;
-                }
             }
 
             return null;
