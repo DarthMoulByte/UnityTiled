@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
 
-namespace Tiled
+namespace TiledUtilities
 {
     public class TileLayer : Layer
     {

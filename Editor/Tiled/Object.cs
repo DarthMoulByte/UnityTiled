@@ -1,7 +1,6 @@
 using System.Xml.Linq;
-using UnityEngine;
 
-namespace Tiled
+namespace TiledUtilities
 {
     public abstract class Object
     {

@@ -2,63 +2,66 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-public class TilesetSpriteTool : EditorWindow
+namespace TiledUtilities
 {
-    private Texture2D _tilesetTexture;
-    private int _margin;
-    private int _padding;
-    private int _tileWidth = 32;
-    private int _tileHeight = 32;
-
-    void OnGUI()
+    public class TilesetSpriteTool : EditorWindow
     {
-        _tilesetTexture = (Texture2D) EditorGUILayout.ObjectField("Tileset", _tilesetTexture, typeof(Texture2D), false);
-        _tileWidth = EditorGUILayout.IntField("Tile Width", _tileWidth);
-        _tileHeight = EditorGUILayout.IntField("Tile Height", _tileHeight);
-        _margin = EditorGUILayout.IntField("Margin", _margin);
-        _padding = EditorGUILayout.IntField("Padding", _padding);
+        private Texture2D _tilesetTexture;
+        private int _margin;
+        private int _padding;
+        private int _tileWidth = 32;
+        private int _tileHeight = 32;
 
-        if (GUILayout.Button("Cut Sprites"))
+        void OnGUI()
         {
-            var path = AssetDatabase.GetAssetPath(_tilesetTexture);
-            var importer = (TextureImporter) AssetImporter.GetAtPath(path);
+            _tilesetTexture = (Texture2D) EditorGUILayout.ObjectField("Tileset", _tilesetTexture, typeof(Texture2D), false);
+            _tileWidth = EditorGUILayout.IntField("Tile Width", _tileWidth);
+            _tileHeight = EditorGUILayout.IntField("Tile Height", _tileHeight);
+            _margin = EditorGUILayout.IntField("Margin", _margin);
+            _padding = EditorGUILayout.IntField("Padding", _padding);
 
-            importer.spriteImportMode = SpriteImportMode.Multiple;
-
-            var spritesheet = new List<SpriteMetaData>();
-
-            var gid = 0;
-            for (int y = _margin; y <= _tilesetTexture.height - _margin - _tileHeight; y += _tileHeight + _padding)
+            if (GUILayout.Button("Cut Sprites"))
             {
-                for (int x = _margin; x <= _tilesetTexture.width - _margin - _tileWidth; x += _tileWidth + _padding)
+                var path = AssetDatabase.GetAssetPath(_tilesetTexture);
+                var importer = (TextureImporter) AssetImporter.GetAtPath(path);
+
+                importer.spriteImportMode = SpriteImportMode.Multiple;
+
+                var spritesheet = new List<SpriteMetaData>();
+
+                var gid = 0;
+                for (int y = _margin; y <= _tilesetTexture.height - _margin - _tileHeight; y += _tileHeight + _padding)
                 {
-                    var metadata = new SpriteMetaData();
-                    metadata.alignment = (int)SpriteAlignment.TopLeft;
-                    metadata.name = string.Format("{0}_{1}", _tilesetTexture.name, gid + 1);
-                    metadata.rect = new Rect(
-                        x,
-                        _tilesetTexture.height - y - _tileHeight,
-                        _tileWidth,
-                        _tileHeight
-                    );
-                    spritesheet.Add(metadata);
+                    for (int x = _margin; x <= _tilesetTexture.width - _margin - _tileWidth; x += _tileWidth + _padding)
+                    {
+                        var metadata = new SpriteMetaData();
+                        metadata.alignment = (int)SpriteAlignment.TopLeft;
+                        metadata.name = string.Format("{0}_{1}", _tilesetTexture.name, gid + 1);
+                        metadata.rect = new Rect(
+                            x,
+                            _tilesetTexture.height - y - _tileHeight,
+                            _tileWidth,
+                            _tileHeight
+                        );
+                        spritesheet.Add(metadata);
 
-                    gid++;
+                        gid++;
+                    }
                 }
+
+                importer.spritesheet = spritesheet.ToArray();
+
+                EditorUtility.SetDirty(importer);
+                importer.SaveAndReimport();
             }
-
-            importer.spritesheet = spritesheet.ToArray();
-
-            EditorUtility.SetDirty(importer);
-            importer.SaveAndReimport();
         }
-    }
 
-    [MenuItem("Window/Tiled/Tileset Tool")]
-    private static void OpenWindow()
-    {
-        var window = GetWindow<TilesetSpriteTool>();
-        window.titleContent = new GUIContent("Tileset Tool");
-        window.Show();
+        [MenuItem("Window/Tiled/Tileset Tool")]
+        private static void OpenWindow()
+        {
+            var window = GetWindow<TilesetSpriteTool>();
+            window.titleContent = new GUIContent("Tileset Tool");
+            window.Show();
+        }
     }
 }

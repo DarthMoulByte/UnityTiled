@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace Tiled
+namespace TiledUtilities
 {
     public abstract class Layer
     {

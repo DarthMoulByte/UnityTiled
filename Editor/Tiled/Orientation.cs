@@ -1,4 +1,4 @@
-namespace Tiled
+namespace TiledUtilities
 {
     public enum Orientation
     {

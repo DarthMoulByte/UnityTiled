@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Xml.Linq;
 
-namespace Tiled
+namespace TiledUtilities
 {
     internal static class Extensions
     {

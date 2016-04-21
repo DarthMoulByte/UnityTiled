@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
-namespace Tiled
+namespace TiledUtilities
 {
     public class ObjectGroup : Layer
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace Tiled
+namespace TiledUtilities
 {
     public class PropertyCollection : IEnumerable<Property>
     {

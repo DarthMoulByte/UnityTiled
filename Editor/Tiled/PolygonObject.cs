@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Xml.Linq;
 using UnityEngine;
 
-namespace Tiled
+namespace TiledUtilities
 {
     public class PolygonObject : Object
     {
