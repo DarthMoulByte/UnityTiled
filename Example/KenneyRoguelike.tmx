@@ -53,7 +53,7 @@
  </tileset>
  <layer name="Ground" width="20" height="15" offsetx="0" offsety="-1">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NmYGBgQcKsQMxGAbYBYlskbEeheaVAXIaEyyk0j9Y4kpGBIQqIoxmpY9ZEIJ4MxBOoYOYkqFkwPIVM82B+nEgl89DdRal5p4H6zmDBZ6kQJ6N4YDEAIj9gA7AEAAA=
+   H4sIAAAAAAAAA2NmYGBgQcKsQMxGAbYBYlskbEeheaVAXIaEyyk0j9Y4kpGBIQqIoxmJEydk1kQgngzEE9D0ToKKTyHBPJieyVj0ngayzwDxWSLMg/llIh7zSMHo7qLUPJhf0DExfhvFgxsDAPMfFySwBAAA
   </data>
  </layer>
  <layer name="Decorations" width="20" height="15">
