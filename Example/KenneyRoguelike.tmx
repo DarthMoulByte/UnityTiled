@@ -4,49 +4,41 @@
   <image source="KenneyRoguelike.png" width="968" height="526"/>
   <tile id="344">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Top,Left"/>
    </properties>
   </tile>
   <tile id="345">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Top"/>
    </properties>
   </tile>
   <tile id="346">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Top,Right"/>
    </properties>
   </tile>
   <tile id="401">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Left"/>
    </properties>
   </tile>
   <tile id="403">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Right"/>
    </properties>
   </tile>
   <tile id="458">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Left,Bottom"/>
    </properties>
   </tile>
   <tile id="459">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Bottom"/>
    </properties>
   </tile>
   <tile id="460">
    <properties>
-    <property name="Collider" type="bool" value="true"/>
     <property name="CollisionSides" value="Right,Bottom"/>
    </properties>
   </tile>

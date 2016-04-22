@@ -48,7 +48,7 @@ namespace UnityTiled
             {
                 // Find all the collision tiles in the map
                 var colliderTiles = layer.gameObject.GetComponentsInChildren<TileProperties>()
-                                        .Where(p => p.ContainsProperty("Collider") && p.GetBool("Collider"))
+                                        .Where(p => p.ContainsProperty("CollisionSides"))
                                         .Select(p => new CollisionTile { transform = p.transform, collisionSides = p.GetEnum<CollisionSides>("CollisionSides") });
                                         
                 if (!colliderTiles.Any())
