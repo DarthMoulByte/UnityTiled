@@ -43,88 +43,84 @@ namespace UnityTiled
         
         void OnTmxMapImported()
         {
-            // Find all the collision tiles in the map
-            var colliderTiles = GetComponentsInChildren<TileProperties>()
-                                    .Where(p => p.ContainsProperty("Collider") && p.GetBool("Collider"))
-                                    .Select(p => new CollisionTile { transform = p.transform, collisionSides = p.GetEnum<CollisionSides>("CollisionSides") });
-                                    
-            if (!colliderTiles.Any())
-                return;
-                
-            // Going to build up a set of edge colliders based on our collision layer
-            var collisionRoot = new GameObject("_GeneratedCollision");
-            collisionRoot.isStatic = true;
-            collisionRoot.transform.SetParent(transform);
-
-            // Build up the list of all segments that need to be created into one big list
-            var segments = new List<Point[]>();
-            foreach (var tile in colliderTiles)
+            // Iterate all children and generate colliders per layer
+            foreach (Transform layer in transform)
             {
-                var pos = (Vector2)tile.transform.localPosition;
-                var topLeft = new Point(pos);
-                var topRight = new Point(pos + new Vector2(1, 0));
-                var bottomRight = new Point(pos + new Vector2(1, -1));
-                var bottomLeft = new Point(pos + new Vector2(0, -1));
-
-                if ((tile.collisionSides & CollisionSides.Top) == CollisionSides.Top)
-                    segments.Add(new[] { topLeft, topRight });
-                if ((tile.collisionSides & CollisionSides.Right) == CollisionSides.Right)
-                    segments.Add(new[] { topRight, bottomRight });
-                if ((tile.collisionSides & CollisionSides.Bottom) == CollisionSides.Bottom)
-                    segments.Add(new[] { bottomRight, bottomLeft });
-                if ((tile.collisionSides & CollisionSides.Left) == CollisionSides.Left)
-                    segments.Add(new[] { bottomLeft, topLeft });
-            }
-        
-            // Combine segments into line lists based on vertices that touch
-            var lineLists = new List<List<Point>>();
-            var currentList = new List<Point>(segments[0]);
-            lineLists.Add(currentList);
-            segments.RemoveAt(0);
-            do
-            {
-                var nextSegment = segments.FirstOrDefault(s => s[0].Equals(currentList.Last())); 
-                if (nextSegment != null)
+                // Find all the collision tiles in the map
+                var colliderTiles = layer.gameObject.GetComponentsInChildren<TileProperties>()
+                                        .Where(p => p.ContainsProperty("Collider") && p.GetBool("Collider"))
+                                        .Select(p => new CollisionTile { transform = p.transform, collisionSides = p.GetEnum<CollisionSides>("CollisionSides") });
+                                        
+                if (!colliderTiles.Any())
+                    continue;
+                    
+                // Build up the list of all segments that need to be created into one big list
+                var segments = new List<Point[]>();
+                foreach (var tile in colliderTiles)
                 {
-                    currentList.Add(nextSegment[1]);
-                    segments.Remove(nextSegment);
+                    var pos = (Vector2)tile.transform.localPosition;
+                    var topLeft = new Point(pos);
+                    var topRight = new Point(pos + new Vector2(1, 0));
+                    var bottomRight = new Point(pos + new Vector2(1, -1));
+                    var bottomLeft = new Point(pos + new Vector2(0, -1));
+
+                    if ((tile.collisionSides & CollisionSides.Top) == CollisionSides.Top)
+                        segments.Add(new[] { topLeft, topRight });
+                    if ((tile.collisionSides & CollisionSides.Right) == CollisionSides.Right)
+                        segments.Add(new[] { topRight, bottomRight });
+                    if ((tile.collisionSides & CollisionSides.Bottom) == CollisionSides.Bottom)
+                        segments.Add(new[] { bottomRight, bottomLeft });
+                    if ((tile.collisionSides & CollisionSides.Left) == CollisionSides.Left)
+                        segments.Add(new[] { bottomLeft, topLeft });
                 }
-                else
+            
+                // Combine segments into line lists based on vertices that touch
+                var lineLists = new List<List<Point>>();
+                var currentList = new List<Point>(segments[0]);
+                lineLists.Add(currentList);
+                segments.RemoveAt(0);
+                do
                 {
-                    currentList = new List<Point>(segments[0]);
-                    lineLists.Add(currentList);
-                    segments.RemoveAt(0);
-                }
-            } while (segments.Count > 0);
-
-            // Take each line list and build an edge collider around it
-            foreach (var lineList in lineLists)
-            {
-                // First we optimize away unnecessary vertices between segments that are continuous, e.g.
-                // if we have two tiles with bottom collisions touching, we remove the middle point so we
-                // have one segment span both tiles, rather than two separate segments.
-                if (lineList.Count >= 3)
-                {
-                    for (int i = 1; i < lineList.Count - 1; i++)
+                    var nextSegment = segments.FirstOrDefault(s => s[0].Equals(currentList.Last())); 
+                    if (nextSegment != null)
                     {
-                        var a = lineList[i - 1];
-                        var b = lineList[i];
-                        var c = lineList[i + 1];
+                        currentList.Add(nextSegment[1]);
+                        segments.Remove(nextSegment);
+                    }
+                    else
+                    {
+                        currentList = new List<Point>(segments[0]);
+                        lineLists.Add(currentList);
+                        segments.RemoveAt(0);
+                    }
+                } while (segments.Count > 0);
 
-                        if ((a.x == b.x && b.x == c.x) || (a.y == b.y && b.y == c.y))
+                // Take each line list and build an edge collider around it
+                foreach (var lineList in lineLists)
+                {
+                    // First we optimize away unnecessary vertices between segments that are continuous, e.g.
+                    // if we have two tiles with bottom collisions touching, we remove the middle point so we
+                    // have one segment span both tiles, rather than two separate segments.
+                    if (lineList.Count >= 3)
+                    {
+                        for (int i = 1; i < lineList.Count - 1; i++)
                         {
-                            lineList.RemoveAt(i);
-                            i--;
+                            var a = lineList[i - 1];
+                            var b = lineList[i];
+                            var c = lineList[i + 1];
+
+                            if ((a.x == b.x && b.x == c.x) || (a.y == b.y && b.y == c.y))
+                            {
+                                lineList.RemoveAt(i);
+                                i--;
+                            }
                         }
                     }
-                }
 
-                // Use the line list to create an edge collider
-                var colliderObj = new GameObject("Collider");
-                colliderObj.isStatic = true;
-                colliderObj.transform.SetParent(collisionRoot.transform);
-                var edgeCollider = colliderObj.AddComponent<EdgeCollider2D>();
-                edgeCollider.points = lineList.Select(p => new Vector2(p.x, p.y)).ToArray();
+                    // Use the line list to create an edge collider
+                    var edgeCollider = layer.gameObject.AddComponent<EdgeCollider2D>();
+                    edgeCollider.points = lineList.Select(p => new Vector2(p.x, p.y)).ToArray();
+                }
             }
         }
     }
