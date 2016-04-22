@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public class TilesetSpriteTool : EditorWindow
     {

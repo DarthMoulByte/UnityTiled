@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public class SpriteCache
     {

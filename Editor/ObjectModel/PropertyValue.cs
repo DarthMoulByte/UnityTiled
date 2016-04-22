@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public class PropertyValue
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     [CustomEditor(typeof(TiledMap))]
     public class TiledMapEditor : Editor
@@ -132,7 +132,7 @@ namespace TiledUtilities
             return createdGameObjects;
         }
 
-        private void SetScriptProperties(TiledUtilities.Object obj, GameObject objGameObject)
+        private void SetScriptProperties(UnityTiled.Object obj, GameObject objGameObject)
         {
             foreach (var userScript in GetAllUserComponents(objGameObject, true))
             {
@@ -176,7 +176,7 @@ namespace TiledUtilities
             }
         }
 
-        private static string GetObjectName(TiledUtilities.Object obj)
+        private static string GetObjectName(UnityTiled.Object obj)
         {
             string name = obj.name;
             if (string.IsNullOrEmpty(name))

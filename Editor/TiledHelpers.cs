@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public static class TiledHelpers
     {

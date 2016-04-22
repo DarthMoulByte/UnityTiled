@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Xml.Linq;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     internal static class Extensions
     {

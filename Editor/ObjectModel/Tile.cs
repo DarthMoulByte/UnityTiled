@@ -1,4 +1,4 @@
-namespace TiledUtilities
+namespace UnityTiled
 {
     public struct Tile
     {

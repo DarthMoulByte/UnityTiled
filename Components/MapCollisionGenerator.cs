@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     /*
     * This component scans all tiles in the map looking for those with a Collider property set to true.

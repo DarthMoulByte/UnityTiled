@@ -4,7 +4,7 @@ using System.Globalization;
 using System;
 using System.Linq;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
 	public class TileProperties : MonoBehaviour 
 	{

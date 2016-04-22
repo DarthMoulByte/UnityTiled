@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Xml.Linq;
 using UnityEngine;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public class PolyLineObject : Object
     {

@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public class Map
     {

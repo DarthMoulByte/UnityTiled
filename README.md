@@ -1,4 +1,4 @@
-# TiledUtilities
+# UnityTiled
 
 A set of utilities for working with [Tiled](http://mapeditor.org) maps in Unity.
 
@@ -8,15 +8,15 @@ The goal of this is to be an editor tool (no runtime logic) that can import a Ti
 
 The tool converts maps from Tiled:
 
-![Tiled](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_Tiled.png)
+![Tiled](https://github.com/nickgravelyn/UnityTiled/raw/master/Readme_Tiled.png)
 
 Into objects in Unity:
 
-![Tiled](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_Unity.png)
+![Tiled](https://github.com/nickgravelyn/UnityTiled/raw/master/Readme_Unity.png)
 
 ## Tileset Tool
 
-![Tileset Tool Window](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_TilesetTool.png)
+![Tileset Tool Window](https://github.com/nickgravelyn/UnityTiled/raw/master/Readme_TilesetTool.png)
 
 Open with `Window->Tiled->Tileset Tool`.
 
@@ -26,15 +26,15 @@ This tool automatically sets a texture to use multiple sprites and provide a fas
 
 This is a simple script placed on an object in your scene to drive importing. The script itself just holds a string so it's not adding any Tiled logic into your runtime. You can create one easily via the menus:
 
-![Create Tiled Map](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_CreateTiledMap.png)
+![Create Tiled Map](https://github.com/nickgravelyn/UnityTiled/raw/master/Readme_CreateTiledMap.png)
 
 Once created the map component will show an error if there isn't a valid path to a TMX/XML file:
 
-![Inspector Error](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_TiledMapError.png)
+![Inspector Error](https://github.com/nickgravelyn/UnityTiled/raw/master/Readme_TiledMapError.png)
 
 You can type in a path or use the helpful locate button. Once you have it configured, a button will appear to allow importing:
 
-![Inspector Valid](https://github.com/UnityCommunity/TiledUtilities/raw/master/Readme_TiledMapValid.png)
+![Inspector Valid](https://github.com/nickgravelyn/UnityTiled/raw/master/Readme_TiledMapValid.png)
 
 Here's how the import process works:
 
@@ -54,7 +54,7 @@ Here's how the import process works:
 
 ## Collisions
 
-There's a built in `MapCollisionGenerator` component in TiledUtilities. Add this to the same object that has the `TiledMap` component and during import it will generate edge colliders based on your tiles. It does this by first finding all tiles in the map that have a `Collider` property set to `true`. It then reads the `CollisionSides` property, parsing it as a comma-separated list containing any combination of `Top`, `Left`, `Right`, and `Bottom`. Using that information, it builds up one or more edge colliders for the map. See the example scene to see how this looks.
+There's a built in `MapCollisionGenerator` component in UnityTiled. Add this to the same object that has the `TiledMap` component and during import it will generate edge colliders based on your tiles. It does this by first finding all tiles in the map that have a `Collider` property set to `true`. It then reads the `CollisionSides` property, parsing it as a comma-separated list containing any combination of `Top`, `Left`, `Right`, and `Bottom`. Using that information, it builds up one or more edge colliders for the map. See the example scene to see how this looks.
 
 ## Credits
 

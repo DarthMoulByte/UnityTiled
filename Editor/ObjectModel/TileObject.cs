@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace TiledUtilities
+namespace UnityTiled
 {
     public class TileObject : Object
     {
