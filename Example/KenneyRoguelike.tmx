@@ -50,6 +50,24 @@
     <property name="CollisionSides" value="Right,Bottom"/>
    </properties>
   </tile>
+  <tile id="469">
+   <properties>
+    <property name="Lit" type="bool" value="false"/>
+    <property name="Type" value="Campfire"/>
+   </properties>
+  </tile>
+  <tile id="470">
+   <properties>
+    <property name="Lit" type="bool" value="true"/>
+    <property name="Type" value="Campfire"/>
+   </properties>
+  </tile>
+  <tile id="471">
+   <properties>
+    <property name="Lit" type="bool" value="true"/>
+    <property name="Type" value="Campfire"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Ground" width="20" height="15" offsetx="0" offsety="-1">
   <data encoding="base64" compression="gzip">
@@ -58,7 +76,7 @@
  </layer>
  <layer name="Decorations" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGBiQycTAkAXE2UCcw4TJl2UizbxFQPWLgXgJEC9lwuSHkWjeKKAe8EAK++uMlJvXCDTPk8rx2UQF87D5zYPK7mwc4ekYAAAoB8WwBAAA
+   H4sIAAAAAAAAA2NgGBiQycTAkAXE2UCcw4TJl2UizbxFQPWLgXgJEC9lwuSHkWgePcA1xoF2AWFwnQpu9KBy2DcCzfNEMvMGFdzYRKP0QQu/j2QAAA373k+wBAAA
   </data>
  </layer>
  <objectgroup name="Objects">

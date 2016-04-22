@@ -7,7 +7,7 @@ namespace UnityTiled
 {
     public class PropertyCollection : IEnumerable<Property>
     {
-        private readonly Dictionary<string, Property> properties = new Dictionary<string, Property>();
+        private readonly Dictionary<string, Property> _properties = new Dictionary<string, Property>();
 
         internal PropertyCollection()
             : this(null) {}
@@ -16,24 +16,34 @@ namespace UnityTiled
         {
             if (element != null) {
                 foreach (var p in element.Elements("property")) {
-                    properties[p.Attribute("name").Value] = new Property(p);
+                    _properties[p.Attribute("name").Value] = new Property(p);
                 }
             }
         }
 
         public IEnumerator<Property> GetEnumerator()
         {
-            return properties.Values.GetEnumerator();
+            return _properties.Values.GetEnumerator();
+        }
+        
+        public bool Contains(string key)
+        {
+            return _properties.ContainsKey(key);
+        }
+        
+        public PropertyValue GetProperty(string key)
+        {
+            return _properties[key].value;
         }
 
         public Dictionary<string, string> GetDictionary()
         {
-           return properties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.value.AsString());
+           return _properties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.value.AsString());
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return properties.Values.GetEnumerator();
+            return _properties.Values.GetEnumerator();
         }
     }
 }

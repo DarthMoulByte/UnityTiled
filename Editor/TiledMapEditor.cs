@@ -51,11 +51,11 @@ namespace UnityTiled
 
                         var tileLayer = layer as TileLayer;
                         if (tileLayer != null)
-                            CreateSpritesForLayer(spriteCache, layerObject, tileLayer, tmxMap);
+                            CreateSpritesForLayer(spriteCache, layerObject, tileLayer, tmxMap, allCreatedObjects);
 
                         var objectGroup = layer as ObjectGroup;
                         if (objectGroup != null)
-                            allCreatedObjects.AddRange(CreateObjects(tmxMap, layer, layerObject, objectGroup));
+                            CreateObjects(tmxMap, layer, layerObject, objectGroup, allCreatedObjects);
                     }
 
                     // Inform each created prefab individually know that the map was imported
@@ -72,7 +72,7 @@ namespace UnityTiled
             }
         }
 
-        private static void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer, Map tmxMap)
+        private void CreateSpritesForLayer(SpriteCache spriteCache, GameObject layerObject, TileLayer tileLayer, Map tmxMap, List<GameObject> createdGameObjects)
         {
             for (int y = 0; y < tileLayer.height; y++)
             {
@@ -82,23 +82,46 @@ namespace UnityTiled
                     if (tile.gid <= 0)
                         continue;
 
-                    var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.gid));
-                    tileObject.isStatic = true;
-                    tileObject.transform.SetParent(layerObject.transform);
-                    tileObject.transform.localPosition = new Vector3(x, -y, 0);
+                    var properties = tmxMap.GetProperties(tile.gid);
 
-                    var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
-                    tileRenderer.sprite = spriteCache.GetSprite(tile.gid);
-                    
-                    var tileProperties = tileObject.AddComponent<TileProperties>();
-                    tileProperties.SetProperties(tmxMap.GetProperties(tile.gid));
+                    if (properties.Contains("Type"))
+                    {
+                        var type = properties.GetProperty("Type").AsString();
+                        
+                        var prefab = FindPrefabForObject(type);
+                        if (!prefab)
+                        {
+                            Debug.LogError(string.Format("Did not have a prefab for tile ({0}, {1}) of type '{2}' on layer '{3}'", x, y, type, tileLayer.name));
+                            continue;
+                        }
+
+                        var objGameObject = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+                        createdGameObjects.Add(objGameObject);
+
+                        objGameObject.transform.SetParent(layerObject.transform);
+                        objGameObject.transform.localPosition = new Vector3(x, -y, 0);
+
+                        SetScriptProperties(objGameObject, properties);
+                    }
+                    else
+                    {
+                        var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.gid));
+                        tileObject.isStatic = true;
+                        tileObject.transform.SetParent(layerObject.transform);
+                        tileObject.transform.localPosition = new Vector3(x, -y, 0);
+
+                        var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
+                        tileRenderer.sprite = spriteCache.GetSprite(tile.gid);
+                        
+                        var tileProperties = tileObject.AddComponent<TileProperties>();
+                        tileProperties.SetProperties(properties.GetDictionary());
+                    }
                 }
             }
         }
 
-        private List<GameObject> CreateObjects(Map map, Layer layer, GameObject layerObject, ObjectGroup objectGroup)
+        private void CreateObjects(Map map, Layer layer, GameObject layerObject, ObjectGroup objectGroup, List<GameObject> createdGameObjects)
         {
-            var createdGameObjects = new List<GameObject>();
             foreach (var obj in objectGroup.objects)
             {
                 // TODO: What could we do with objects that don't have types?
@@ -127,18 +150,17 @@ namespace UnityTiled
                 if (obj is TileObject)
                     objGameObject.transform.localPosition += new Vector3(0, 1, 0);
 
-                SetScriptProperties(obj, objGameObject);
+                SetScriptProperties(objGameObject, obj.properties);
             }
-            return createdGameObjects;
         }
 
-        private void SetScriptProperties(UnityTiled.Object obj, GameObject objGameObject)
+        private void SetScriptProperties(GameObject objGameObject, PropertyCollection properties)
         {
             foreach (var userScript in GetAllUserComponents(objGameObject, true))
             {
                 var target = new SerializedObject(userScript);
 
-                foreach (var prop in obj.properties)
+                foreach (var prop in properties)
                 {
                     var serializedProperty = FindSerializedPropertyForObject(target, prop.name);
                     if (serializedProperty == null)

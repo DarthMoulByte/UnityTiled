@@ -49,10 +49,9 @@ namespace UnityTiled
             return new Map(doc, Path.GetDirectoryName(file));
         }
 
-        public Dictionary<string, string> GetProperties(uint gid)
+        public PropertyCollection GetProperties(uint gid)
         {
-            var propertyCollection = tileSets.Select(ts => ts.GetTileProperties(gid)).FirstOrDefault(p => p != null);
-            return propertyCollection.GetDictionary();
+            return tileSets.Select(ts => ts.GetTileProperties(gid)).FirstOrDefault(p => p != null) ?? new PropertyCollection();
         }
     }
 }
