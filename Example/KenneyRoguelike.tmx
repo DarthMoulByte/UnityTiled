@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="25" tilewidth="16" tileheight="16" nextobjectid="8">
  <tileset firstgid="1" name="KenneyRoguelike" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
   <image source="KenneyRoguelike.png" width="968" height="526"/>
   <tile id="344">
@@ -61,14 +61,14 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Ground" width="20" height="15" offsetx="0" offsety="-1">
+ <layer name="Ground" width="20" height="25" offsetx="0" offsety="-1">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NmYGBgQcKsQMxGAbYBYlskbEeheaVAXIaEyyk0j9Y4kpGBIQqIoxmJEydk1kQgngzEE9D0ToKKTyHBPJieyVj0ngayzwDxWSLMg/llIh7zSMHo7qLUPJhf0DExfhvFgxsDAPMfFySwBAAA
+   H4sIAAAAAAAAA2NmYGBgQcKsQMxGAbYBYlskbEeheaVAXIaEyyk0j9Y4kpGBIQqIoxmJEydk1kQgngzEE9D0ToKKTyHBPJieyVj0ngayzwDxWSLMg/llIh7zSMHo7qLUPJhf0DExfhvFgxsTAjeZwHgBEB8A4gQitBAyrwGIHwCxAxArUME8sDkwc6lgHtifMH9Tat4oGNoAAAFrZKrQBwAA
   </data>
  </layer>
- <layer name="Decorations" width="20" height="15">
+ <layer name="Decorations" width="20" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGBiQycTAkAXE2UCcw4TJl2UizbxFQPWLgXgJEC9lwuSHkWgePcA1xoF2AWFwnQpu9KBy2DcCzfNEMvMGFdzYRKP0QQu/j2QAAA373k+wBAAA
+   H4sIAAAAAAAAA2NgGBiQycTAkAXE2UCcw4TJl2UizbxFQPWLgXgJEC9lwuSHkWgePcA1xoF2AWFwnQpu9KBy2DcCzfNEMvMGFdzYRKP0QQu/j4JRMApGATYAABre9kfQBwAA
   </data>
  </layer>
  <objectgroup name="Objects">

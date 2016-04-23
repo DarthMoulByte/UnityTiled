@@ -99,7 +99,7 @@ namespace UnityTiled
                         createdGameObjects.Add(objGameObject);
 
                         objGameObject.transform.SetParent(layerObject.transform);
-                        objGameObject.transform.localPosition = new Vector3(x, -y, 0);
+                        objGameObject.transform.localPosition = new Vector3(x + 0.5f, -y - 0.5f, 0);
 
                         SetScriptProperties(objGameObject, properties);
                     }
@@ -108,10 +108,29 @@ namespace UnityTiled
                         var tileObject = new GameObject(string.Format("Tile ({0},{1}) GID: {2}", x, y, tile.gid));
                         tileObject.isStatic = true;
                         tileObject.transform.SetParent(layerObject.transform);
-                        tileObject.transform.localPosition = new Vector3(x, -y, 0);
+                        tileObject.transform.localPosition = new Vector3(x + 0.5f, -y - 0.5f, 0);
 
                         var tileRenderer = tileObject.AddComponent<SpriteRenderer>();
                         tileRenderer.sprite = spriteCache.GetSprite(tile.gid);
+                        
+                        if (tile.flipDiagnoal)
+                        {
+                            if (tile.flipHorizontal)
+                            {
+                                tileObject.transform.localEulerAngles = new Vector3(0, 0, -90);
+                                tileRenderer.flipX = tile.flipVertical;
+                            }
+                            else 
+                            {
+                                tileObject.transform.localEulerAngles = new Vector3(0, 0, 90);
+                                tileRenderer.flipX = !tile.flipVertical;
+                            }
+                        }
+                        else
+                        {
+                            tileRenderer.flipX = tile.flipHorizontal;
+                            tileRenderer.flipY = tile.flipVertical;
+                        }
                         
                         var tileProperties = tileObject.AddComponent<TileProperties>();
                         tileProperties.SetProperties(properties.GetDictionary());

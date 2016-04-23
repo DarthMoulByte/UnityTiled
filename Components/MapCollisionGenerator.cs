@@ -58,11 +58,11 @@ namespace UnityTiled
                 var segments = new List<Point[]>();
                 foreach (var tile in colliderTiles)
                 {
-                    var pos = (Vector2)tile.transform.localPosition;
-                    var topLeft = new Point(pos);
-                    var topRight = new Point(pos + new Vector2(1, 0));
-                    var bottomRight = new Point(pos + new Vector2(1, -1));
-                    var bottomLeft = new Point(pos + new Vector2(0, -1));
+                    var topLeftVector = (Vector2)tile.transform.localPosition + new Vector2(-0.5f, 0.5f);
+                    var topLeft = new Point(topLeftVector);
+                    var topRight = new Point(topLeftVector + new Vector2(1, 0));
+                    var bottomRight = new Point(topLeftVector + new Vector2(1, -1));
+                    var bottomLeft = new Point(topLeftVector + new Vector2(0, -1));
 
                     if ((tile.collisionSides & CollisionSides.Top) == CollisionSides.Top)
                         segments.Add(new[] { topLeft, topRight });

@@ -35,7 +35,7 @@ namespace UnityTiled
                     for (int x = _margin; x <= _tilesetTexture.width - _margin - _tileWidth; x += _tileWidth + _padding)
                     {
                         var metadata = new SpriteMetaData();
-                        metadata.alignment = (int)SpriteAlignment.TopLeft;
+                        metadata.alignment = (int)SpriteAlignment.Center;
                         metadata.name = string.Format("{0}_{1}", _tilesetTexture.name, gid + 1);
                         metadata.rect = new Rect(
                             x,
