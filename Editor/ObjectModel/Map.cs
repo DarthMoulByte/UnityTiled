@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using UnityEngine;
 
 namespace UnityTiled
 {
@@ -51,7 +52,10 @@ namespace UnityTiled
 
         public PropertyCollection GetProperties(uint gid)
         {
-            return tileSets.Select(ts => ts.GetTileProperties(gid)).FirstOrDefault(p => p != null) ?? new PropertyCollection();
+            var tileset = tileSets.FirstOrDefault(ts => ts.ContainsTile(gid));
+            if (tileset == null)
+                Debug.LogError("Failed to find properties for tile " + gid);
+            return tileset.GetTileProperties(gid);
         }
     }
 }

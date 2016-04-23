@@ -16,6 +16,7 @@ namespace UnityTiled
         public string name { get; private set; }
         public string source { get; private set; }
         public int spacing { get; private set; }
+        public int tilecount {get; private set; }
         public int tileHeight { get; private set; }
         public int tileWidth { get; private set; }
         public string tsxFile { get; private set; }
@@ -38,6 +39,7 @@ namespace UnityTiled
             name = tileSetElem.Attribute("name").StringValue();
             tileWidth = tileSetElem.Attribute("tilewidth").IntValue();
             tileHeight = tileSetElem.Attribute("tileheight").IntValue();
+            tilecount = tileSetElem.Attribute("tilecount").IntValue();
             spacing = tileSetElem.Attribute("spacing").IntValue();
             margin = tileSetElem.Attribute("margin").IntValue();
 
@@ -48,6 +50,12 @@ namespace UnityTiled
             foreach (var t in tileSetElem.Elements("tile")) {
                 tileProperties[t.Attribute("id").UIntValue()] = new PropertyCollection(t.Element("properties"));
             }
+        }
+        
+        public bool ContainsTile(uint gid)
+        {
+            var id = gid - firstGid;
+            return id >= 0 && id < tilecount;
         }
 
         public PropertyCollection GetTileProperties(uint gid)
