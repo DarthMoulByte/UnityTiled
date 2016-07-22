@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.IO.Compression;
+using UnityTiled.Compression;
 using System.Xml.Linq;
 
 namespace UnityTiled
@@ -26,7 +26,7 @@ namespace UnityTiled
                     stream = new GZipStream(stream, CompressionMode.Decompress, false);
                 }
                 else {
-                    throw new Exception("Unsupported compression.");
+                    throw new Exception("Unsupported compression: " + compression);
                 }
 
                 using (stream) {
